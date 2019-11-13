@@ -17,11 +17,11 @@ public class PricesView extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        origin = new javax.swing.JComboBox<>();
+        destination = new javax.swing.JComboBox<>();
+        price = new javax.swing.JTextField();
+        consult = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -40,45 +40,37 @@ public class PricesView extends javax.swing.JFrame {
         getContentPane().add(HeaderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 529, 130));
 
         jPanel1.setBackground(new java.awt.Color(1, 156, 175));
-        jPanel1.setLayout(null);
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel1.setText("Remetente:");
-        jPanel1.add(jLabel1);
-        jLabel1.setBounds(52, 35, 68, 17);
+        jLabel1.setText("Origem:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 35, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel3.setText("Destinatário:");
-        jPanel1.add(jLabel3);
-        jLabel3.setBounds(46, 81, 74, 17);
+        jLabel3.setText("Destino:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 81, 74, -1));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel4.setText("Valor*:");
         jLabel4.setToolTipText("Não considerando o peso da carga");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(79, 124, 41, 17);
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 124, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1);
-        jComboBox1.setBounds(130, 32, 320, 23);
+        origin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        origin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(origin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 32, 320, -1));
 
-        jComboBox2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox2);
-        jComboBox2.setBounds(130, 78, 320, 23);
+        destination.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        destination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(destination, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 78, 320, -1));
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(130, 121, 320, 23);
+        price.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 121, 320, -1));
 
-        jButton1.setText("Consultar");
-        jPanel1.add(jButton1);
-        jButton1.setBounds(130, 160, 79, 23);
+        consult.setText("Consultar");
+        jPanel1.add(consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
-        jButton2.setText("Voltar");
-        jPanel1.add(jButton2);
-        jButton2.setBounds(380, 160, 61, 23);
+        back.setText("Voltar");
+        jPanel1.add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 160, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 130, 530, 210));
 
@@ -123,15 +115,15 @@ public class PricesView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HeaderPanel;
     private javax.swing.JLabel Title;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton back;
+    private javax.swing.JButton consult;
+    private javax.swing.JComboBox<String> destination;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> origin;
+    private javax.swing.JTextField price;
     // End of variables declaration//GEN-END:variables
 }

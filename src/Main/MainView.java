@@ -90,6 +90,11 @@ public class MainView extends javax.swing.JFrame {
         jMenuBar1.add(btnRegistry);
 
         btnMainSystem.setText("Transportadora");
+        btnMainSystem.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMainSystemMouseClicked(evt);
+            }
+        });
         jMenuBar1.add(btnMainSystem);
 
         setJMenuBar(jMenuBar1);
@@ -98,21 +103,27 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTruckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTruckActionPerformed
-        
+        new Truck.TruckView().show();
         dispose();
     }//GEN-LAST:event_btnTruckActionPerformed
 
     private void btnTruckloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTruckloadActionPerformed
         // TODO add your handling code here:
-        
+        new Trailer.TrailerView().show();
         dispose();
     }//GEN-LAST:event_btnTruckloadActionPerformed
 
     private void btnDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDriverActionPerformed
         // TODO add your handling code here:
-        
+        new Driver.DriverView().show();
         dispose();
     }//GEN-LAST:event_btnDriverActionPerformed
+
+    private void btnMainSystemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMainSystemMouseClicked
+        // TODO add your handling code here:
+        new Service.AffreightmentView().show();
+        dispose();        
+    }//GEN-LAST:event_btnMainSystemMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

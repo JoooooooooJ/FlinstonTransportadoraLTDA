@@ -22,25 +22,25 @@ public class TrailerView extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         Image = new javax.swing.JLabel();
-        Id = new javax.swing.JTextField();
-        Brand = new javax.swing.JTextField();
-        Model = new javax.swing.JTextField();
-        Year = new javax.swing.JTextField();
-        Plate = new javax.swing.JTextField();
-        Chassi = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
+        brand = new javax.swing.JTextField();
+        model = new javax.swing.JTextField();
+        year = new javax.swing.JTextField();
+        plate = new javax.swing.JTextField();
+        chassi = new javax.swing.JTextField();
         KGcapacity = new javax.swing.JTextField();
         M3capacity = new javax.swing.JTextField();
-        Type = new javax.swing.JComboBox<>();
+        type = new javax.swing.JComboBox<>();
         AddImage = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         Search = new javax.swing.JTextField();
         Home = new javax.swing.JLabel();
-        Add = new javax.swing.JButton();
-        Remove = new javax.swing.JButton();
-        Find = new javax.swing.JButton();
-        Update = new javax.swing.JButton();
-        FindBy = new javax.swing.JComboBox<>();
+        add = new javax.swing.JButton();
+        remove = new javax.swing.JButton();
+        find = new javax.swing.JButton();
+        update = new javax.swing.JButton();
+        findby = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -85,20 +85,20 @@ public class TrailerView extends javax.swing.JFrame {
         jLabel22.setText("Tipo carreta:");
         TrailerData.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 105, -1, -1));
         TrailerData.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 230, 100));
-        TrailerData.add(Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 31, 63, -1));
+        TrailerData.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 31, 63, -1));
 
-        Brand.setToolTipText("");
-        TrailerData.add(Brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 31, 64, -1));
+        brand.setToolTipText("");
+        TrailerData.add(brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 31, 64, -1));
 
-        Model.setToolTipText("");
-        TrailerData.add(Model, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 31, 72, -1));
-        TrailerData.add(Year, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 31, 70, -1));
-        TrailerData.add(Plate, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 31, 90, -1));
-        TrailerData.add(Chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 81, -1));
+        model.setToolTipText("");
+        TrailerData.add(model, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 31, 72, -1));
+        TrailerData.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 31, 70, -1));
+        TrailerData.add(plate, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 31, 90, -1));
+        TrailerData.add(chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 81, -1));
         TrailerData.add(KGcapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
         TrailerData.add(M3capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 79, 63, -1));
 
-        TrailerData.add(Type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 125, 140, -1));
+        TrailerData.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 125, 140, -1));
 
         AddImage.setText("Adicionar Imagem");
         TrailerData.add(AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 130, 40));
@@ -121,40 +121,40 @@ public class TrailerView extends javax.swing.JFrame {
         });
         menuPanel.add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 30, 30));
 
-        Add.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_icon.png"))); // NOI18N
-        Add.setToolTipText("adicionar novo Motorista");
-        Add.setBorder(null);
-        Add.setBorderPainted(false);
-        Add.addActionListener(new java.awt.event.ActionListener() {
+        add.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_icon.png"))); // NOI18N
+        add.setToolTipText("adicionar novo Motorista");
+        add.setBorder(null);
+        add.setBorderPainted(false);
+        add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddActionPerformed(evt);
+                addActionPerformed(evt);
             }
         });
-        menuPanel.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 110));
+        menuPanel.add(add, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 80, 110));
 
-        Remove.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        Remove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete_icon.png"))); // NOI18N
-        Remove.setToolTipText("remover Motorista cadastrado");
-        Remove.setBorder(null);
-        Remove.setBorderPainted(false);
-        menuPanel.add(Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 110));
+        remove.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        remove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/delete_icon.png"))); // NOI18N
+        remove.setToolTipText("remover Motorista cadastrado");
+        remove.setBorder(null);
+        remove.setBorderPainted(false);
+        menuPanel.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 110));
 
-        Find.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        Find.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search_icon.png"))); // NOI18N
-        Find.setToolTipText("buscar Motorista");
-        Find.setBorder(null);
-        Find.setBorderPainted(false);
-        menuPanel.add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 80, 110));
+        find.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        find.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/search_icon.png"))); // NOI18N
+        find.setToolTipText("buscar Motorista");
+        find.setBorder(null);
+        find.setBorderPainted(false);
+        menuPanel.add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 80, 110));
 
-        Update.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        Update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit_icon.png"))); // NOI18N
-        Update.setToolTipText("atualizar cadastro de Motorista");
-        Update.setBorder(null);
-        Update.setBorderPainted(false);
-        menuPanel.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
+        update.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        update.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/edit_icon.png"))); // NOI18N
+        update.setToolTipText("atualizar cadastro de Motorista");
+        update.setBorder(null);
+        update.setBorderPainted(false);
+        menuPanel.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
 
-        menuPanel.add(FindBy, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 130, -1));
+        menuPanel.add(findby, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 130, -1));
 
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, -1));
 
@@ -167,9 +167,9 @@ public class TrailerView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_HomeMouseClicked
 
-    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
+    private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_AddActionPerformed
+    }//GEN-LAST:event_addActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -204,25 +204,19 @@ public class TrailerView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add;
     private javax.swing.JButton AddImage;
-    private javax.swing.JTextField Brand;
-    private javax.swing.JTextField Chassi;
-    private javax.swing.JButton Find;
-    private javax.swing.JComboBox<String> FindBy;
     private javax.swing.JLabel Home;
-    private javax.swing.JTextField Id;
     private javax.swing.JLabel Image;
     private javax.swing.JTextField KGcapacity;
     private javax.swing.JTextField M3capacity;
-    private javax.swing.JTextField Model;
-    private javax.swing.JTextField Plate;
-    private javax.swing.JButton Remove;
     private javax.swing.JTextField Search;
     private javax.swing.JPanel TrailerData;
-    private javax.swing.JComboBox<String> Type;
-    private javax.swing.JButton Update;
-    private javax.swing.JTextField Year;
+    private javax.swing.JButton add;
+    private javax.swing.JTextField brand;
+    private javax.swing.JTextField chassi;
+    private javax.swing.JButton find;
+    private javax.swing.JComboBox<String> findby;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -234,5 +228,11 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JTextField model;
+    private javax.swing.JTextField plate;
+    private javax.swing.JButton remove;
+    private javax.swing.JComboBox<String> type;
+    private javax.swing.JButton update;
+    private javax.swing.JTextField year;
     // End of variables declaration//GEN-END:variables
 }
