@@ -19,8 +19,6 @@ public class TruckView extends javax.swing.JFrame {
         Update = new javax.swing.JButton();
         byid = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
         TruckDataPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -61,7 +59,7 @@ public class TruckView extends javax.swing.JFrame {
                 HomeMouseClicked(evt);
             }
         });
-        menuPanel.add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 30, 30));
+        menuPanel.add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 30, 30));
 
         Add.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         Add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_icon.png"))); // NOI18N
@@ -95,18 +93,12 @@ public class TruckView extends javax.swing.JFrame {
         Update.setBorder(null);
         Update.setBorderPainted(false);
         menuPanel.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
-        menuPanel.add(byid, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 280, -1));
+        menuPanel.add(byid, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 180, -1));
 
         jLabel21.setText("Pesquisar/Deletar por id:");
         menuPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
 
-        jLabel13.setText("Digite na janela abaixo caso queria realizar");
-        menuPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 210, -1));
-
-        jLabel23.setText("uma pesquisa ou uma remoção");
-        menuPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
-
-        getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, -1));
+        getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
 
         TruckDataPanel.setBackground(new java.awt.Color(255, 255, 255));
         TruckDataPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 204), 1, true));
@@ -154,7 +146,7 @@ public class TruckView extends javax.swing.JFrame {
 
         jLabel11.setText("Tipo veículo:");
         TruckDataPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 105, -1, -1));
-        TruckDataPanel.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 230, 70));
+        TruckDataPanel.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 230, 70));
         TruckDataPanel.add(Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 31, 63, -1));
 
         Brand.setToolTipText("");
@@ -174,9 +166,9 @@ public class TruckView extends javax.swing.JFrame {
         TruckDataPanel.add(Type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 126, 140, -1));
 
         AddImage.setText("Adicionar Imagem");
-        TruckDataPanel.add(AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 120, 40));
+        TruckDataPanel.add(AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 120, 40));
 
-        getContentPane().add(TruckDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 620, 210));
+        getContentPane().add(TruckDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 520, 210));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -247,10 +239,8 @@ public class TruckView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

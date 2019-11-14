@@ -175,8 +175,6 @@ public class DriverDao implements DAO<Driver> {
         }catch(SQLException e){
             throw new RuntimeException(e);
         }
-    }
-
-  
+    }  
     
 }

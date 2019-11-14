@@ -40,8 +40,6 @@ public class TrailerView extends javax.swing.JFrame {
         update = new javax.swing.JButton();
         byid = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -155,12 +153,6 @@ public class TrailerView extends javax.swing.JFrame {
         jLabel21.setText("Pesquisar/Deletar por id:");
         menuPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
 
-        jLabel23.setText("uma pesquisa ou uma remoção");
-        menuPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
-
-        jLabel11.setText("Digite na janela abaixo caso queria realizar");
-        menuPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 210, -1));
-
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, -1));
 
         pack();
@@ -221,7 +213,6 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JTextField chassi;
     private javax.swing.JButton find;
     private javax.swing.JTextField id;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -232,7 +223,6 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField model;
     private javax.swing.JTextField plate;
