@@ -412,7 +412,7 @@ public class DriverView extends javax.swing.JFrame {
     
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
         
-        new Main.view.MainView().show();
+        new Transportadora.MainView().show();
         dispose();
     }//GEN-LAST:event_HomeMouseClicked
 
@@ -536,35 +536,39 @@ public class DriverView extends javax.swing.JFrame {
 
     private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
         
-        Driver driver;     
-        SimpleDateFormat fmtdate = new SimpleDateFormat("dd/MM/yyyy");        
-        
-        try{
-            driver = (Driver) new DriverDao().read(Long.parseLong(byid.getText()));
-            id.setText(Long.toString(driver.getId()));
-            name.setText(driver.getName());
-            phone.setText(driver.getPhone());
-            rg.setText(Long.toString(driver.getRG()));
-            cpf.setText(Long.toString(driver.getCPF()));
-            email.setText(driver.getEmail());
-            cnhNum.setText(Long.toString(driver.getCNHnum()));
-            cnhType.setText(driver.getCNHtype());
-            expiration.setText(fmtdate.format(driver.getExpiration().getTime()));
-            if(driver.isStatus()){
-                stats.setSelectedIndex(1);
-            }
-            else
-                stats.setSelectedIndex(2);
-            street.setText(driver.getAddress().getStreet());
-            number.setText(Integer.toString
-            (driver.getAddress().getNumber()));
-            city.setText(driver.getAddress().getCity());
-            cep.setText(driver.getAddress().getCEP());
-            uf.setSelectedItem(driver.getAddress().getUF());
-            
-        }catch(RuntimeException e){
-            JOptionPane.showMessageDialog(rootPane,"Erro ao Consultar dados no Banco!\n" + e);
-        }        
+        if(!byid.getText().trim().equals("")){
+            Driver driver;     
+            SimpleDateFormat fmtdate = new SimpleDateFormat("dd/MM/yyyy");        
+
+            try{
+                driver = (Driver) new DriverDao().read(Long.parseLong(byid.getText()));
+                id.setText(Long.toString(driver.getId()));
+                name.setText(driver.getName());
+                phone.setText(driver.getPhone());
+                rg.setText(Long.toString(driver.getRG()));
+                cpf.setText(Long.toString(driver.getCPF()));
+                email.setText(driver.getEmail());
+                cnhNum.setText(Long.toString(driver.getCNHnum()));
+                cnhType.setText(driver.getCNHtype());
+                expiration.setText(fmtdate.format(driver.getExpiration().getTime()));
+                if(driver.isStatus()){
+                    stats.setSelectedIndex(1);
+                }
+                else
+                    stats.setSelectedIndex(2);
+                street.setText(driver.getAddress().getStreet());
+                number.setText(Integer.toString
+                (driver.getAddress().getNumber()));
+                city.setText(driver.getAddress().getCity());
+                cep.setText(driver.getAddress().getCEP());
+                uf.setSelectedItem(driver.getAddress().getUF());
+
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(rootPane,"Erro ao Consultar dados no Banco!\n" + e);
+            }      
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Digirte algo na barra de pesquisa");
+        }  
     }//GEN-LAST:event_FindActionPerformed
 
     public static void main(String args[]) {

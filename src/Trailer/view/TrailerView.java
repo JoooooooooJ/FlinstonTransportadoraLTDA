@@ -160,7 +160,7 @@ public class TrailerView extends javax.swing.JFrame {
 
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
         // TODO add your handling code here:
-        new Main.view.MainView().show();
+        new Transportadora.MainView().show();
         dispose();
     }//GEN-LAST:event_HomeMouseClicked
 

@@ -163,7 +163,7 @@ public class DriverDao implements DAO<Driver> {
                 driver.setCNHnum(rs.getLong("cnh"));
                 driver.setCNHtype(rs.getString("tipocnh"));   
                 Calendar date = Calendar.getInstance();
-                date.setTime(rs.getDate("datanascimento"));
+                date.setTime(rs.getDate("datavencimento"));
                 driver.setExpiration(date);
                 driver.setStatus(rs.getBoolean("status"));
                 AddressDao address= new AddressDao();

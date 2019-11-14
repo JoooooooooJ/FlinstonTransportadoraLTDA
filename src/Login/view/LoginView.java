@@ -42,7 +42,6 @@ public class LoginView extends javax.swing.JFrame {
         mainPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
-        jLabel.setForeground(new java.awt.Color(109, 109, 109));
         jLabel.setText("Digite suas credenciais abaixo.");
         mainPanel.add(jLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 120, -1));
 
@@ -67,7 +66,6 @@ public class LoginView extends javax.swing.JFrame {
         mainPanel.add(passPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 193, 28));
 
         EMAILADDRESS.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
-        EMAILADDRESS.setForeground(new java.awt.Color(109, 109, 109));
         EMAILADDRESS.setText("LOGIN");
         mainPanel.add(EMAILADDRESS, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
 
@@ -101,7 +99,6 @@ public class LoginView extends javax.swing.JFrame {
         mainPanel.add(btnSignin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 100, 40));
 
         PASSWORD.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
-        PASSWORD.setForeground(new java.awt.Color(109, 109, 109));
         PASSWORD.setText("SENHA");
         mainPanel.add(PASSWORD, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
@@ -128,7 +125,7 @@ public class LoginView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSigninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSigninActionPerformed
-        new Main.view.MainView().show();
+        new Transportadora.MainView().show();
         dispose();
     }//GEN-LAST:event_btnSigninActionPerformed
 
