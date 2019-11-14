@@ -12,14 +12,15 @@ public class TruckView extends javax.swing.JFrame {
     private void initComponents() {
 
         menuPanel = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
-        Search = new javax.swing.JTextField();
         Home = new javax.swing.JLabel();
         Add = new javax.swing.JButton();
         Remove = new javax.swing.JButton();
         Find = new javax.swing.JButton();
         Update = new javax.swing.JButton();
-        FindBy = new javax.swing.JComboBox<>();
+        byid = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
         TruckDataPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -53,10 +54,6 @@ public class TruckView extends javax.swing.JFrame {
         menuPanel.setBackground(new java.awt.Color(255, 255, 255));
         menuPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel12.setText("Pesquisar por:");
-        menuPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 11, -1, -1));
-        menuPanel.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 280, -1));
 
         Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home_icon.png"))); // NOI18N
         Home.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,8 +95,16 @@ public class TruckView extends javax.swing.JFrame {
         Update.setBorder(null);
         Update.setBorderPainted(false);
         menuPanel.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
+        menuPanel.add(byid, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 280, -1));
 
-        menuPanel.add(FindBy, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 130, -1));
+        jLabel21.setText("Pesquisar/Deletar por id:");
+        menuPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
+
+        jLabel13.setText("Digite na janela abaixo caso queria realizar");
+        menuPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 210, -1));
+
+        jLabel23.setText("uma pesquisa ou uma remoção");
+        menuPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
 
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, -1));
 
@@ -226,7 +231,6 @@ public class TruckView extends javax.swing.JFrame {
     private javax.swing.JTextField DriverId;
     private javax.swing.JComboBox<String> DriverPicker;
     private javax.swing.JButton Find;
-    private javax.swing.JComboBox<String> FindBy;
     private javax.swing.JTextField FuelTank;
     private javax.swing.JLabel Home;
     private javax.swing.JTextField Id;
@@ -235,16 +239,18 @@ public class TruckView extends javax.swing.JFrame {
     private javax.swing.JTextField Modell;
     private javax.swing.JTextField Plate;
     private javax.swing.JButton Remove;
-    private javax.swing.JTextField Search;
     private javax.swing.JPanel TruckDataPanel;
     private javax.swing.JComboBox<String> Type;
     private javax.swing.JButton Update;
     private javax.swing.JTextField Year;
+    private javax.swing.JTextField byid;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

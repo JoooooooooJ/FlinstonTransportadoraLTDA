@@ -66,7 +66,7 @@ public class AddressDao implements DAO<Address>{
         
          try(Connection con = new ConnectionBuilder().getConnection()){            
             Address address = (Address) obj;
-            String sql = "update endereco set rua=? ,numero =? ,cidade =? ,cep =? ,uf=?)"
+            String sql = "update endereco set rua=? ,numero =? ,cidade =? ,cep =? ,uf=?"
                       +  "where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);            
             stmt.setString(1,address.getStreet());
@@ -95,13 +95,16 @@ public class AddressDao implements DAO<Address>{
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1,id);                        
             ResultSet rs = stmt.executeQuery();
-            address.setId(rs.getLong("cod"));
-            address.setStreet(rs.getString("rua"));
-            address.setNumber(rs.getInt("numero"));
-            address.setCity(rs.getString("cidade"));
-            address.setCEP(rs.getString("cep"));
-            address.setUF(rs.getString("uf"));
-            stmt.close();            
+            while(rs.next())
+            {
+                address.setId(rs.getLong("cod"));
+                address.setStreet(rs.getString("rua"));
+                address.setNumber(rs.getInt("numero"));
+                address.setCity(rs.getString("cidade"));
+                address.setCEP(rs.getString("cep"));
+                address.setUF(rs.getString("uf"));
+            }            
+            stmt.close();           
             con.close();
             
             return address;

@@ -25,7 +25,7 @@ public class DriverDao implements DAO<Driver> {
             Driver driver = (Driver) obj;
             String sql = "insert into motorista(cod,nome,fone,rg,cpf,email,cnh,tipocnh,datavencimento,status)"
                       +  "values(?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement stmt = con.prepareStatement(sql);;
+            PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, driver.getId());
             stmt.setString(2,driver.getName());
             stmt.setString(3, driver.getPhone());
@@ -56,10 +56,15 @@ public class DriverDao implements DAO<Driver> {
         
         try(Connection con = new ConnectionBuilder().getConnection()){            
             Driver driver = (Driver) obj;
-            DAO<Address> address = new AddressDao();        
-            address.remove(driver.getAddress()
-                    .getId());
-            String sql = "delete from endereco where cod=?";
+            DAO<Address> address = new AddressDao();
+            Address ad = new Address();
+            ad.setId(driver.getAddress().getId());
+            try{
+                address.remove(ad);
+            }catch(RuntimeException e){
+                throw e;
+            }
+            String sql = "delete from motorista where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1,driver.getId());
             
@@ -78,8 +83,8 @@ public class DriverDao implements DAO<Driver> {
     public void update(Object obj) {
         try(Connection con = new ConnectionBuilder().getConnection()){            
             Driver driver = (Driver) obj;
-            String sql = "update motorista set cod=?,nome=?,fone=?,rg=?,cpf=?,email=?,cnh=?,tipocnh=?,datavencimento=?,status=?)"
-                      +  "where id=?";
+            String sql = "update motorista set nome=?,fone=?,rg=?,cpf=?,email=?,cnh=?,tipocnh=?,datavencimento=?,status=?"
+                      +  "where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);            
             stmt.setString(1,driver.getName());
             stmt.setString(2, driver.getPhone());
@@ -115,21 +120,23 @@ public class DriverDao implements DAO<Driver> {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
-            driver.setId(rs.getLong("cod"));
-            driver.setName(rs.getString("nome"));
-            driver.setPhone(rs.getString("fone"));
-            driver.setRG(rs.getLong("rg"));
-            driver.setCPF(rs.getLong("cpf"));
-            driver.setEmail(rs.getString("email"));
-            driver.setCNHnum(rs.getLong("cnh"));
-            driver.setCNHtype(rs.getString("tipocnh"));   
-            Calendar date = Calendar.getInstance();
-            date.setTime(rs.getDate("datanascimento"));
-            driver.setExpiration(date);
-            driver.setStatus(rs.getBoolean("status"));
-            AddressDao address= new AddressDao();
-            driver.setAddress((Address) address.read(id));
-            
+            while(rs.next())
+            {
+                driver.setId(rs.getLong("cod"));
+                driver.setName(rs.getString("nome"));
+                driver.setPhone(rs.getString("fone"));
+                driver.setRG(rs.getLong("rg"));
+                driver.setCPF(rs.getLong("cpf"));
+                driver.setEmail(rs.getString("email"));
+                driver.setCNHnum(rs.getLong("cnh"));
+                driver.setCNHtype(rs.getString("tipocnh"));   
+                Calendar date = Calendar.getInstance();
+                date.setTime(rs.getDate("datavencimento"));
+                driver.setExpiration(date);
+                driver.setStatus(rs.getBoolean("status"));
+                AddressDao address= new AddressDao();
+                driver.setAddress((Address) address.read(id));
+            }            
             return driver;
         }catch(SQLException e){
             throw new RuntimeException(e);

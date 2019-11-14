@@ -22,13 +22,14 @@ public class DriverView extends javax.swing.JFrame {
 
         menuPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
-        Search = new javax.swing.JTextField();
+        byid = new javax.swing.JTextField();
         Home = new javax.swing.JLabel();
         Add = new javax.swing.JButton();
         Remove = new javax.swing.JButton();
         Find = new javax.swing.JButton();
         Update = new javax.swing.JButton();
-        FindBy = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         DriverData = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -72,9 +73,9 @@ public class DriverView extends javax.swing.JFrame {
         menuPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel12.setText("Pesquisar por:");
-        menuPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 11, -1, -1));
-        menuPanel.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 270, -1));
+        jLabel12.setText("Pesquisar/Deletar por id:");
+        menuPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
+        menuPanel.add(byid, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 270, -1));
 
         Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home_icon.png"))); // NOI18N
         Home.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -101,6 +102,11 @@ public class DriverView extends javax.swing.JFrame {
         Remove.setToolTipText("remover Motorista cadastrado");
         Remove.setBorder(null);
         Remove.setBorderPainted(false);
+        Remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveActionPerformed(evt);
+            }
+        });
         menuPanel.add(Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 110));
 
         Find.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -108,6 +114,11 @@ public class DriverView extends javax.swing.JFrame {
         Find.setToolTipText("buscar Motorista");
         Find.setBorder(null);
         Find.setBorderPainted(false);
+        Find.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FindActionPerformed(evt);
+            }
+        });
         menuPanel.add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 80, 110));
 
         Update.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -115,9 +126,18 @@ public class DriverView extends javax.swing.JFrame {
         Update.setToolTipText("atualizar cadastro de Motorista");
         Update.setBorder(null);
         Update.setBorderPainted(false);
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
         menuPanel.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
 
-        menuPanel.add(FindBy, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 130, -1));
+        jLabel11.setText("Digite na janela abaixo caso queria realizar");
+        menuPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, -1, -1));
+
+        jLabel17.setText("uma pesquisa ou uma remoção");
+        menuPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
 
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, -1));
 
@@ -405,12 +425,99 @@ public class DriverView extends javax.swing.JFrame {
         driver.setStatus(true);
         driver.setAddress(address);           
         try {
-            new DriverDao().add(driver);                      
+            new DriverDao().add(driver); 
+            JOptionPane.showMessageDialog(rootPane,"Motorista inserido com sucesso");
         } catch (RuntimeException e) {
-            JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!");
+            JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!" + e);
         }
          
     }//GEN-LAST:event_AddActionPerformed
+
+    private void RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveActionPerformed
+        // TODO add your handling code here:  
+        
+         DriverDao rm = new DriverDao();
+         Driver driver = new Driver();
+         driver.setId(Long.parseLong(byid.getText()));
+         Address address = new Address();
+         address.setId(Long.parseLong(byid.getText()));
+         driver.setAddress(address);
+         try{
+             rm.remove(driver);
+             JOptionPane.showMessageDialog(rootPane,"Motorista excluido com sucesso");
+         }catch(RuntimeException e){
+             
+             JOptionPane.showMessageDialog(rootPane,"Ao excluir dados do banco" + e);
+         }
+    }//GEN-LAST:event_RemoveActionPerformed
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+        // TODO add your handling code here:
+        Address address = new Address();
+        address.setId(Long.parseLong(id.getText()));
+        address.setStreet(street.getText());
+        address.setNumber(Integer.parseInt(number.getText()));
+        address.setCity(city.getText());
+        address.setCEP(cep.getText());
+        address.setUF(uf.getSelectedItem().toString()); 
+        //
+        Driver driver = new Driver();        
+        driver.setId(Long.parseLong(id.getText()));
+        driver.setName(name.getText());
+        driver.setPhone(phone.getText());
+        driver.setRG(Long.parseLong(rg.getText()));
+        driver.setCPF(Long.parseLong(cpf.getText()));
+        driver.setEmail(email.getText());
+        driver.setCNHnum(Long.parseLong(cnhNum.getText()));
+        driver.setCNHtype(cnhType.getText());
+        Calendar expiration = null ;
+        Date date;
+	try {
+	
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
+            expiration = Calendar.getInstance();
+	    expiration.setTime(date);         
+            
+	}catch (ParseException e){
+            JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
+	} 
+        driver.setExpiration(expiration);
+        driver.setStatus(true);
+        driver.setAddress(address);           
+        try {
+            new DriverDao().update(driver);   
+            JOptionPane.showMessageDialog(rootPane,"Dados atualizados com sucesso");
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!" + e);
+        }
+
+    }//GEN-LAST:event_UpdateActionPerformed
+
+    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
+        // TODO add your handling code here:
+        Driver driver;        
+        driver = (Driver) new DriverDao().read(Long.parseLong(byid.getText()));
+        id.setText(Long.toString(driver.getId()));
+        name.setText(driver.getName());
+        phone.setText(driver.getPhone());
+        rg.setText(Long.toString(driver.getRG()));
+        cpf.setText(Long.toString(driver.getCPF()));
+        email.setText(driver.getEmail());
+        cnhNum.setText(Long.toString(driver.getCNHnum()));
+        cnhType.setText(driver.getCNHtype());
+        expiration.setText(driver.getExpiration().toString());
+        if(driver.isStatus()){
+            stats.setSelectedIndex(0);
+        }
+        else
+            stats.setSelectedIndex(1);
+        street.setText(driver.getAddress().getStreet());
+        number.setText(Integer.toString
+        (driver.getAddress().getNumber()));
+        city.setText(driver.getAddress().getCity());
+        cep.setText(driver.getAddress().getCEP());
+        uf.setSelectedItem(driver.getAddress().getUF());
+    }//GEN-LAST:event_FindActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -449,13 +556,12 @@ public class DriverView extends javax.swing.JFrame {
     private javax.swing.JPanel AddressPanel;
     private javax.swing.JPanel DriverData;
     private javax.swing.JButton Find;
-    private javax.swing.JComboBox<String> FindBy;
     private javax.swing.JLabel Home;
     private javax.swing.JLabel Image;
     private javax.swing.JButton Remove;
-    private javax.swing.JTextField Search;
     private javax.swing.JButton Update;
     private javax.swing.JButton addImage;
+    private javax.swing.JTextField byid;
     private javax.swing.JTextField cep;
     private javax.swing.JTextField city;
     private javax.swing.JTextField cnhNum;
@@ -466,11 +572,13 @@ public class DriverView extends javax.swing.JFrame {
     private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

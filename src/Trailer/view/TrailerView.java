@@ -33,14 +33,15 @@ public class TrailerView extends javax.swing.JFrame {
         type = new javax.swing.JComboBox<>();
         AddImage = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
-        jLabel20 = new javax.swing.JLabel();
-        Search = new javax.swing.JTextField();
         Home = new javax.swing.JLabel();
         add = new javax.swing.JButton();
         remove = new javax.swing.JButton();
         find = new javax.swing.JButton();
         update = new javax.swing.JButton();
-        findby = new javax.swing.JComboBox<>();
+        byid = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -109,17 +110,13 @@ public class TrailerView extends javax.swing.JFrame {
         menuPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         menuPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel20.setText("Pesquisar por:");
-        menuPanel.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 11, -1, -1));
-        menuPanel.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 210, -1));
-
         Home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home_icon.png"))); // NOI18N
         Home.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 HomeMouseClicked(evt);
             }
         });
-        menuPanel.add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, 30, 30));
+        menuPanel.add(Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 30, 30));
 
         add.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add_icon.png"))); // NOI18N
@@ -153,8 +150,16 @@ public class TrailerView extends javax.swing.JFrame {
         update.setBorder(null);
         update.setBorderPainted(false);
         menuPanel.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
+        menuPanel.add(byid, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 210, -1));
 
-        menuPanel.add(findby, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 130, -1));
+        jLabel21.setText("Pesquisar/Deletar por id:");
+        menuPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
+
+        jLabel23.setText("uma pesquisa ou uma remoção");
+        menuPanel.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, -1, -1));
+
+        jLabel11.setText("Digite na janela abaixo caso queria realizar");
+        menuPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 210, -1));
 
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, -1));
 
@@ -209,14 +214,14 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JLabel Image;
     private javax.swing.JTextField KGcapacity;
     private javax.swing.JTextField M3capacity;
-    private javax.swing.JTextField Search;
     private javax.swing.JPanel TrailerData;
     private javax.swing.JButton add;
     private javax.swing.JTextField brand;
+    private javax.swing.JTextField byid;
     private javax.swing.JTextField chassi;
     private javax.swing.JButton find;
-    private javax.swing.JComboBox<String> findby;
     private javax.swing.JTextField id;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -225,8 +230,9 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField model;
     private javax.swing.JTextField plate;
