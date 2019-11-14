@@ -10,7 +10,7 @@ public interface DAO<T> {
     
     public void update(Object obj);
     
-    public Object read(Object obj);
+    public Object read(long id);
     
     public Collection<T> getList();
     
