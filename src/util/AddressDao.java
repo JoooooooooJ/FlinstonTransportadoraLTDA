@@ -14,9 +14,11 @@ public class AddressDao implements DAO<Address>{
     @Override
     public void add(Object obj) {
         
-        try(Connection con = new ConnectionBuilder().getConnection()){            
+        try{
+            Connection con;
+            con = new ConnectionBuilder().getConnection();
             Address address = (Address) obj;
-            String sql = "insert into endereco(id,rua,numero,cidade,cep,uf)"
+            String sql = "insert into endereco(cod,rua,numero,cidade,cep,uf)"
                       +  "values(?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, address.getId());
@@ -43,7 +45,7 @@ public class AddressDao implements DAO<Address>{
         
         try(Connection con = new ConnectionBuilder().getConnection()){            
             Address address = (Address) obj;
-            String sql = "delete from endereco where id=?";
+            String sql = "delete from endereco where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1,address.getId());
             
@@ -65,7 +67,7 @@ public class AddressDao implements DAO<Address>{
          try(Connection con = new ConnectionBuilder().getConnection()){            
             Address address = (Address) obj;
             String sql = "update endereco set rua=? ,numero =? ,cidade =? ,cep =? ,uf=?)"
-                      +  "where id=?";
+                      +  "where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);            
             stmt.setString(1,address.getStreet());
             stmt.setInt(2,address.getNumber());
@@ -89,11 +91,11 @@ public class AddressDao implements DAO<Address>{
     public Object read(long id) {
         try(Connection con = new ConnectionBuilder().getConnection()){            
             Address address = new Address();
-            String sql = "select * from endereco where id=?";
+            String sql = "select * from endereco where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1,id);                        
             ResultSet rs = stmt.executeQuery();
-            address.setId(rs.getLong("id"));
+            address.setId(rs.getLong("cod"));
             address.setStreet(rs.getString("rua"));
             address.setNumber(rs.getInt("numero"));
             address.setCity(rs.getString("cidade"));
@@ -121,7 +123,7 @@ public class AddressDao implements DAO<Address>{
             ResultSet rs = stmt.executeQuery();
             while(rs.next()){
                 Address address = new Address();
-                address.setId(rs.getLong("id"));
+                address.setId(rs.getLong("cod"));
                 address.setStreet(rs.getString("rua"));
                 address.setNumber(rs.getInt("numero"));
                 address.setCity(rs.getString("cidade"));

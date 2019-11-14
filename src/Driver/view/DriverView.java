@@ -1,5 +1,14 @@
 package Driver.view;
 
+import Driver.Driver;
+import Driver.repository.DriverDao;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import util.*;
+
 public class DriverView extends javax.swing.JFrame {
 
     public DriverView() {
@@ -32,16 +41,16 @@ public class DriverView extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        Id = new javax.swing.JTextField();
-        Name = new javax.swing.JTextField();
-        Phone = new javax.swing.JTextField();
-        RG = new javax.swing.JTextField();
-        CPF = new javax.swing.JTextField();
-        Email = new javax.swing.JTextField();
-        Status = new javax.swing.JComboBox<>();
-        CNH = new javax.swing.JTextField();
-        CNHtype = new javax.swing.JTextField();
-        CNHexpiration = new javax.swing.JTextField();
+        id = new javax.swing.JTextField();
+        name = new javax.swing.JTextField();
+        phone = new javax.swing.JTextField();
+        rg = new javax.swing.JTextField();
+        cpf = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
+        stats = new javax.swing.JComboBox<>();
+        cnhNum = new javax.swing.JTextField();
+        cnhType = new javax.swing.JTextField();
+        expiration = new javax.swing.JTextField();
         addImage = new javax.swing.JButton();
         AddressPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -49,11 +58,11 @@ public class DriverView extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        Street = new javax.swing.JTextField();
-        City = new javax.swing.JTextField();
-        Number = new javax.swing.JTextField();
-        ZIPcode = new javax.swing.JTextField();
-        UF = new javax.swing.JComboBox<>();
+        street = new javax.swing.JTextField();
+        city = new javax.swing.JTextField();
+        number = new javax.swing.JTextField();
+        cep = new javax.swing.JTextField();
+        uf = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -114,73 +123,50 @@ public class DriverView extends javax.swing.JFrame {
 
         DriverData.setBackground(new java.awt.Color(255, 255, 255));
         DriverData.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 204), 1, true));
-        DriverData.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel1.setText("Código:");
-        DriverData.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel2.setText("Nome:");
         jLabel2.setToolTipText("");
-        DriverData.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 12, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel4.setText("CPF *apenas numeros:");
-        DriverData.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel5.setText("RG *apenas numeros:");
-        DriverData.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 12, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel6.setText("Telefone:");
         jLabel6.setToolTipText("");
-        DriverData.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 12, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel7.setText("E-mail:");
-        DriverData.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 57, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel9.setText("Situação:");
-        DriverData.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 59, -1, -1));
-        DriverData.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 116, 120, 90));
 
         jLabel15.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel15.setText("N° CNH:");
         jLabel15.setToolTipText("");
-        DriverData.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 59, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel16.setText("Data Vencimento:");
-        DriverData.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 59, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel18.setText("Catageoria:");
         jLabel18.setToolTipText("");
-        DriverData.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 59, -1, -1));
-        DriverData.add(Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 31, 63, -1));
 
-        Name.setToolTipText("");
-        DriverData.add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 31, 160, -1));
-        DriverData.add(Phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 31, 70, -1));
+        name.setToolTipText("");
 
-        RG.setToolTipText("");
-        DriverData.add(RG, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 31, 110, -1));
-        DriverData.add(CPF, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 130, -1));
-        DriverData.add(Email, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 74, 63, -1));
+        rg.setToolTipText("");
 
-        Status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo", " " }));
-        DriverData.add(Status, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 78, 80, -1));
+        stats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo", " " }));
 
-        CNH.setToolTipText("");
-        DriverData.add(CNH, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 78, 160, -1));
-        DriverData.add(CNHtype, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 78, 70, -1));
-        DriverData.add(CNHexpiration, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 78, 110, -1));
+        cnhNum.setToolTipText("");
 
         addImage.setText("Adicionar Imagem");
-        DriverData.add(addImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 212, 120, 40));
 
         AddressPanel.setBackground(new java.awt.Color(255, 255, 255));
         AddressPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 255), 1, true));
@@ -200,7 +186,9 @@ public class DriverView extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel14.setText("UF:");
 
-        City.setToolTipText("");
+        city.setToolTipText("");
+
+        uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
 
         javax.swing.GroupLayout AddressPanelLayout = new javax.swing.GroupLayout(AddressPanel);
         AddressPanel.setLayout(AddressPanelLayout);
@@ -210,9 +198,9 @@ public class DriverView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(AddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(Street, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(street, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(ZIPcode, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(AddressPanelLayout.createSequentialGroup()
@@ -225,10 +213,10 @@ public class DriverView extends javax.swing.JFrame {
                         .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(AddressPanelLayout.createSequentialGroup()
                         .addGroup(AddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(UF, javax.swing.GroupLayout.Alignment.LEADING, 0, 59, Short.MAX_VALUE)
-                            .addComponent(Number, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(uf, javax.swing.GroupLayout.Alignment.LEADING, 0, 59, Short.MAX_VALUE)
+                            .addComponent(number, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(City)))
+                        .addComponent(city)))
                 .addContainerGap())
         );
         AddressPanelLayout.setVerticalGroup(
@@ -241,21 +229,136 @@ public class DriverView extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Street, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Number, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(City, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(street, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(number, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AddressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ZIPcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(uf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        DriverData.add(AddressPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 116, -1, 136));
+        javax.swing.GroupLayout DriverDataLayout = new javax.swing.GroupLayout(DriverData);
+        DriverData.setLayout(DriverDataLayout);
+        DriverDataLayout.setHorizontalGroup(
+            DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DriverDataLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(jLabel1)
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2)
+                .addGap(132, 132, 132)
+                .addComponent(jLabel6)
+                .addGap(22, 22, 22)
+                .addComponent(jLabel5)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel4))
+            .addGroup(DriverDataLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
+                .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(rg, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(DriverDataLayout.createSequentialGroup()
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DriverDataLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel7)
+                        .addGap(42, 42, 42))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DriverDataLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(cnhNum, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18)
+                    .addComponent(cnhType, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel16)
+                    .addComponent(expiration, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel9)
+                    .addGroup(DriverDataLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(stats, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(DriverDataLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(AddressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addImage, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        DriverDataLayout.setVerticalGroup(
+            DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(DriverDataLayout.createSequentialGroup()
+                .addGap(9, 9, 9)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(DriverDataLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))))
+                .addGap(2, 2, 2)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DriverDataLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(6, 6, 6)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(DriverDataLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DriverDataLayout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(3, 3, 3)
+                                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cnhNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(DriverDataLayout.createSequentialGroup()
+                                .addComponent(jLabel18)
+                                .addGap(3, 3, 3)
+                                .addComponent(cnhType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DriverDataLayout.createSequentialGroup()
+                                .addComponent(jLabel16)
+                                .addGap(3, 3, 3)
+                                .addComponent(expiration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DriverDataLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(3, 3, 3)
+                                .addComponent(stats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(18, 18, 18)
+                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AddressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(DriverDataLayout.createSequentialGroup()
+                        .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(addImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+        );
 
         getContentPane().add(DriverData, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 610, 280));
 
@@ -269,7 +372,44 @@ public class DriverView extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeMouseClicked
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        // TODO add your handling code here:
+          
+        Address address = new Address();
+        address.setId(Long.parseLong(id.getText()));
+        address.setStreet(street.getText());
+        address.setNumber(Integer.parseInt(number.getText()));
+        address.setCity(city.getText());
+        address.setCEP(cep.getText());
+        address.setUF(uf.getSelectedItem().toString()); 
+        //
+        Driver driver = new Driver();        
+        driver.setId(Long.parseLong(id.getText()));
+        driver.setName(name.getText());
+        driver.setPhone(phone.getText());
+        driver.setRG(Long.parseLong(rg.getText()));
+        driver.setCPF(Long.parseLong(cpf.getText()));
+        driver.setEmail(email.getText());
+        driver.setCNHnum(Long.parseLong(cnhNum.getText()));
+        driver.setCNHtype(cnhType.getText());
+        Calendar expiration = null ;
+        Date date;
+	try {
+	
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
+            expiration = Calendar.getInstance();
+	    expiration.setTime(date);         
+            
+	}catch (ParseException e){
+            JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
+	} 
+        driver.setExpiration(expiration);
+        driver.setStatus(true);
+        driver.setAddress(address);           
+        try {
+            new DriverDao().add(driver);                      
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!");
+        }
+         
     }//GEN-LAST:event_AddActionPerformed
 
     public static void main(String args[]) {
@@ -307,30 +447,23 @@ public class DriverView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Add;
     private javax.swing.JPanel AddressPanel;
-    private javax.swing.JTextField CNH;
-    private javax.swing.JTextField CNHexpiration;
-    private javax.swing.JTextField CNHtype;
-    private javax.swing.JTextField CPF;
-    private javax.swing.JTextField City;
     private javax.swing.JPanel DriverData;
-    private javax.swing.JTextField Email;
     private javax.swing.JButton Find;
     private javax.swing.JComboBox<String> FindBy;
     private javax.swing.JLabel Home;
-    private javax.swing.JTextField Id;
     private javax.swing.JLabel Image;
-    private javax.swing.JTextField Name;
-    private javax.swing.JTextField Number;
-    private javax.swing.JTextField Phone;
-    private javax.swing.JTextField RG;
     private javax.swing.JButton Remove;
     private javax.swing.JTextField Search;
-    private javax.swing.JComboBox<String> Status;
-    private javax.swing.JTextField Street;
-    private javax.swing.JComboBox<String> UF;
     private javax.swing.JButton Update;
-    private javax.swing.JTextField ZIPcode;
     private javax.swing.JButton addImage;
+    private javax.swing.JTextField cep;
+    private javax.swing.JTextField city;
+    private javax.swing.JTextField cnhNum;
+    private javax.swing.JTextField cnhType;
+    private javax.swing.JTextField cpf;
+    private javax.swing.JTextField email;
+    private javax.swing.JTextField expiration;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
@@ -348,5 +481,12 @@ public class DriverView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JTextField name;
+    private javax.swing.JTextField number;
+    private javax.swing.JTextField phone;
+    private javax.swing.JTextField rg;
+    private javax.swing.JComboBox<String> stats;
+    private javax.swing.JTextField street;
+    private javax.swing.JComboBox<String> uf;
     // End of variables declaration//GEN-END:variables
 }

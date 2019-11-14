@@ -12,7 +12,7 @@ public class Driver {
     private long CPF;
     private String email;
     private long CNHnum;
-    private char CNHtype;
+    private String CNHtype;
     private Calendar expiration;
     private boolean status;
     private Address address;
@@ -73,11 +73,11 @@ public class Driver {
         this.CNHnum = CNHnum;
     }
 
-    public char getCNHtype() {
+    public String getCNHtype() {
         return CNHtype;
     }
 
-    public void setCNHtype(char CNHtype) {
+    public void setCNHtype(String CNHtype) {
         this.CNHtype = CNHtype;
     }
 
