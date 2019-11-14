@@ -28,6 +28,7 @@ public class DriverView extends javax.swing.JFrame {
         Remove = new javax.swing.JButton();
         Find = new javax.swing.JButton();
         Update = new javax.swing.JButton();
+        newDriverAdd = new javax.swing.JLabel();
         DriverData = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -131,54 +132,87 @@ public class DriverView extends javax.swing.JFrame {
         });
         menuPanel.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
 
+        newDriverAdd.setFont(new java.awt.Font("Comic Sans MS", 0, 36)); // NOI18N
+        newDriverAdd.setText("+");
+        newDriverAdd.setToolTipText("Realziar um novo cadastro");
+        newDriverAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newDriverAddMouseClicked(evt);
+            }
+        });
+        menuPanel.add(newDriverAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 30, 30));
+
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, -1));
 
         DriverData.setBackground(new java.awt.Color(255, 255, 255));
         DriverData.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 204), 1, true));
+        DriverData.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel1.setText("Código:");
+        DriverData.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 12, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel2.setText("Nome:");
         jLabel2.setToolTipText("");
+        DriverData.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 12, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel4.setText("CPF *apenas numeros:");
+        DriverData.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel5.setText("RG *apenas numeros:");
+        DriverData.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 12, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel6.setText("Telefone:");
         jLabel6.setToolTipText("");
+        DriverData.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 12, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel7.setText("E-mail:");
+        DriverData.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 57, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel9.setText("Situação:");
+        DriverData.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 59, -1, -1));
+        DriverData.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 116, 120, 90));
 
         jLabel15.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel15.setText("N° CNH:");
         jLabel15.setToolTipText("");
+        DriverData.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 59, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel16.setText("Data Vencimento:");
+        DriverData.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 59, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel18.setText("Catageoria:");
         jLabel18.setToolTipText("");
+        DriverData.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 59, -1, -1));
+        DriverData.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 31, 63, -1));
 
         name.setToolTipText("");
+        DriverData.add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 31, 160, -1));
+        DriverData.add(phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 31, 70, -1));
 
         rg.setToolTipText("");
+        DriverData.add(rg, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 31, 110, -1));
+        DriverData.add(cpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 130, -1));
+        DriverData.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 74, 63, -1));
 
         stats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "               ", "Ativo", "Inativo" }));
+        DriverData.add(stats, new org.netbeans.lib.awtextra.AbsoluteConstraints(447, 78, 80, -1));
 
         cnhNum.setToolTipText("");
+        DriverData.add(cnhNum, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 78, 160, -1));
+        DriverData.add(cnhType, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 78, 70, -1));
+        DriverData.add(expiration, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 78, 110, -1));
 
         addImage.setText("Adicionar Imagem");
+        DriverData.add(addImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(441, 212, 120, 40));
 
         AddressPanel.setBackground(new java.awt.Color(255, 255, 255));
         AddressPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 204, 255), 1, true));
@@ -255,122 +289,7 @@ public class DriverView extends javax.swing.JFrame {
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout DriverDataLayout = new javax.swing.GroupLayout(DriverData);
-        DriverData.setLayout(DriverDataLayout);
-        DriverDataLayout.setHorizontalGroup(
-            DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DriverDataLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
-                .addComponent(jLabel2)
-                .addGap(132, 132, 132)
-                .addComponent(jLabel6)
-                .addGap(22, 22, 22)
-                .addComponent(jLabel5)
-                .addGap(9, 9, 9)
-                .addComponent(jLabel4))
-            .addGroup(DriverDataLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
-                .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(rg, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(DriverDataLayout.createSequentialGroup()
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DriverDataLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel7)
-                        .addGap(42, 42, 42))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DriverDataLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel15)
-                    .addComponent(cnhNum, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
-                    .addComponent(cnhType, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel16)
-                    .addComponent(expiration, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addGroup(DriverDataLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(stats, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(DriverDataLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(AddressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addImage, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
-        DriverDataLayout.setVerticalGroup(
-            DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DriverDataLayout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addGroup(DriverDataLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))))
-                .addGap(2, 2, 2)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DriverDataLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(6, 6, 6)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7)
-                    .addGroup(DriverDataLayout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(DriverDataLayout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addGap(3, 3, 3)
-                                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(cnhNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(DriverDataLayout.createSequentialGroup()
-                                .addComponent(jLabel18)
-                                .addGap(3, 3, 3)
-                                .addComponent(cnhType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DriverDataLayout.createSequentialGroup()
-                                .addComponent(jLabel16)
-                                .addGap(3, 3, 3)
-                                .addComponent(expiration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(DriverDataLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(3, 3, 3)
-                                .addComponent(stats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(18, 18, 18)
-                .addGroup(DriverDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AddressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DriverDataLayout.createSequentialGroup()
-                        .addComponent(Image, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(addImage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-        );
+        DriverData.add(AddressPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(9, 116, -1, 136));
 
         getContentPane().add(DriverData, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 600, 280));
 
@@ -567,9 +486,13 @@ public class DriverView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Consultar dados no Banco!\n" + e);
             }      
         }else{
-            JOptionPane.showMessageDialog(rootPane,"Digirte algo na barra de pesquisa");
+            JOptionPane.showMessageDialog(rootPane,"Digite algo na barra de pesquisa");
         }  
     }//GEN-LAST:event_FindActionPerformed
+
+    private void newDriverAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDriverAddMouseClicked
+        clearScreen();
+    }//GEN-LAST:event_newDriverAddMouseClicked
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -640,6 +563,7 @@ public class DriverView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JTextField name;
+    private javax.swing.JLabel newDriverAdd;
     private javax.swing.JTextField number;
     private javax.swing.JTextField phone;
     private javax.swing.JTextField rg;
