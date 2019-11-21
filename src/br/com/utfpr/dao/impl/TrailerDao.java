@@ -20,8 +20,8 @@ public class TrailerDao implements DAO<Trailer>{
             Connection con;
             con = new ConnectionBuilder().getConnection();
             Trailer trailer = (Trailer) obj;
-            String sql = "insert into carreta(cod,marca,modelo,ano,placa)"
-                      +  "capCarga,chassi,tipo(?,?,?,?,?,?,?,?)";
+            String sql = "insert into carreta(cod,marca,modelo,ano,placa,capCarga,chassi,tipo)"
+                    + "values(?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, trailer.getId());
             stmt.setString(2,trailer.getBrand());

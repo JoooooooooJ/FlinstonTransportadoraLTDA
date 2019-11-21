@@ -34,7 +34,7 @@ public class TrailerView extends javax.swing.JFrame {
         plate = new javax.swing.JTextField();
         chassi = new javax.swing.JTextField();
         capKG = new javax.swing.JTextField();
-        type = new javax.swing.JComboBox<String>();
+        type = new javax.swing.JComboBox<>();
         AddImage = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         Home = new javax.swing.JLabel();
@@ -96,6 +96,7 @@ public class TrailerView extends javax.swing.JFrame {
         TrailerData.add(chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 81, -1));
         TrailerData.add(capKG, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
 
+        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Simples", "Dupla", "Tripla", " " }));
         TrailerData.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 125, 140, -1));
 
         AddImage.setText("Adicionar Imagem");
@@ -207,7 +208,7 @@ public class TrailerView extends javax.swing.JFrame {
         if(!isEmpty()){
              TrailerDao rm = new TrailerDao();
              Trailer trailer = new Trailer();
-             trailer.setId(Long.parseLong(byId.getText()));
+             trailer.setId(Long.parseLong(id.getText()));
             
             try{
                 rm.remove(trailer);
@@ -276,11 +277,27 @@ public class TrailerView extends javax.swing.JFrame {
     }//GEN-LAST:event_findActionPerformed
 
     private boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return id.getText().trim().equals("") &&
+                brand.getText().trim().equals("")&&
+                model.getText().trim().equals("")&&
+                year.getText().trim().equals("")&&
+                plate.getText().trim().equals("")&&
+                capKG.getText().trim().equals("")&&
+                chassi.getText().trim().equals("")&&
+                type.getSelectedItem().toString().trim().equals("");
     }
 
     private void clearScreen() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        id.setText("");
+        brand.setText("");
+        model.setText("");
+        year.setText("");
+        plate.setText("");
+        capKG.setText("");
+        chassi.setText("");
+        type.setSelectedItem("");    
+        
     }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

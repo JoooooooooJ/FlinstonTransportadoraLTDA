@@ -502,9 +502,9 @@ public class DriverView extends javax.swing.JFrame {
          if(!isEmpty()){
              DriverDao rm = new DriverDao();
             Driver driver = new Driver();
-            driver.setId(Long.parseLong(byid.getText()));
+            driver.setId(Long.parseLong(id.getText()));
             Address address = new Address();
-            address.setId(Long.parseLong(byid.getText()));
+            address.setId(Long.parseLong(id.getText()));
             driver.setAddress(address);
             try{
                 rm.remove(driver);
