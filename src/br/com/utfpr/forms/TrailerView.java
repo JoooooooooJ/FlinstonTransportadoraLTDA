@@ -1,6 +1,12 @@
 package br.com.utfpr.forms;
 
+import br.com.utfpr.beans.Trailer;
+import br.com.utfpr.dao.impl.TrailerDao;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 public class TrailerView extends javax.swing.JFrame {
+    private Object porId;
 
     public TrailerView() {
         initComponents();
@@ -19,7 +25,6 @@ public class TrailerView extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         Image = new javax.swing.JLabel();
         id = new javax.swing.JTextField();
@@ -28,9 +33,8 @@ public class TrailerView extends javax.swing.JFrame {
         year = new javax.swing.JTextField();
         plate = new javax.swing.JTextField();
         chassi = new javax.swing.JTextField();
-        KGcapacity = new javax.swing.JTextField();
-        M3capacity = new javax.swing.JTextField();
-        type = new javax.swing.JComboBox<>();
+        capKG = new javax.swing.JTextField();
+        type = new javax.swing.JComboBox<String>();
         AddImage = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         Home = new javax.swing.JLabel();
@@ -38,8 +42,8 @@ public class TrailerView extends javax.swing.JFrame {
         remove = new javax.swing.JButton();
         find = new javax.swing.JButton();
         update = new javax.swing.JButton();
-        byid = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
+        byId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -63,7 +67,7 @@ public class TrailerView extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel15.setText("N° Chassi:");
-        TrailerData.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, -1, -1));
+        TrailerData.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel16.setText("Placa:");
@@ -77,10 +81,6 @@ public class TrailerView extends javax.swing.JFrame {
         jLabel18.setText("Cap.  KG:");
         TrailerData.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 57, -1, -1));
 
-        jLabel19.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel19.setText("Cap. M³:");
-        TrailerData.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 57, -1, -1));
-
         jLabel22.setText("Tipo carreta:");
         TrailerData.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 105, -1, -1));
         TrailerData.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 230, 100));
@@ -93,9 +93,8 @@ public class TrailerView extends javax.swing.JFrame {
         TrailerData.add(model, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 31, 72, -1));
         TrailerData.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 31, 70, -1));
         TrailerData.add(plate, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 31, 90, -1));
-        TrailerData.add(chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 81, -1));
-        TrailerData.add(KGcapacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
-        TrailerData.add(M3capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 79, 63, -1));
+        TrailerData.add(chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 81, -1));
+        TrailerData.add(capKG, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
 
         TrailerData.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 125, 140, -1));
 
@@ -133,6 +132,11 @@ public class TrailerView extends javax.swing.JFrame {
         remove.setToolTipText("remover Motorista cadastrado");
         remove.setBorder(null);
         remove.setBorderPainted(false);
+        remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeActionPerformed(evt);
+            }
+        });
         menuPanel.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 110));
 
         find.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -140,6 +144,11 @@ public class TrailerView extends javax.swing.JFrame {
         find.setToolTipText("buscar Motorista");
         find.setBorder(null);
         find.setBorderPainted(false);
+        find.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findActionPerformed(evt);
+            }
+        });
         menuPanel.add(find, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 80, 110));
 
         update.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -147,11 +156,16 @@ public class TrailerView extends javax.swing.JFrame {
         update.setToolTipText("atualizar cadastro de Motorista");
         update.setBorder(null);
         update.setBorderPainted(false);
+        update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateActionPerformed(evt);
+            }
+        });
         menuPanel.add(update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
-        menuPanel.add(byid, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 210, -1));
 
         jLabel21.setText("Pesquisar/Deletar por id:");
         menuPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 60, -1, -1));
+        menuPanel.add(byId, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 210, -1));
 
         getContentPane().add(menuPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, -1));
 
@@ -165,9 +179,109 @@ public class TrailerView extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeMouseClicked
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
-        // TODO add your handling code here:
+        if(!isEmpty()){
+            Trailer trailer = new Trailer();
+            trailer.setId(Long.parseLong(id.getText()));
+            trailer.setBrand(brand.getText());
+            trailer.setModel(model.getText());
+            trailer.setYear(Integer.parseInt(year.getText()));
+            trailer.setPlate(plate.getText());
+            trailer.setCapKG(Double.parseDouble(capKG.getText()));
+            trailer.setChassi(Long.parseLong(chassi.getText()));
+            trailer.setType(type.getSelectedItem().toString());
+                   
+            try {
+                new TrailerDao().add(trailer); 
+                JOptionPane.showMessageDialog(rootPane,"Carreta inserida com sucesso");
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!\n" + e);
+            }
+            clearScreen();
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane,"Por favor preencha os campos obrigatórios");
+        }
     }//GEN-LAST:event_addActionPerformed
 
+    private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
+        if(!isEmpty()){
+             TrailerDao rm = new TrailerDao();
+             Trailer trailer = new Trailer();
+             trailer.setId(Long.parseLong(byId.getText()));
+            
+            try{
+                rm.remove(trailer);
+                JOptionPane.showMessageDialog(rootPane,"Carreta excluida com sucesso");
+            }catch(RuntimeException e){
+
+                JOptionPane.showMessageDialog(rootPane,"Erro o excluir dados do banco\n" + e);
+            }
+            clearScreen();
+         }else{
+             JOptionPane.showMessageDialog(rootPane,"Para excluir dados é preciso primeiro carregá-los\n"
+                                                    + "Utilize a barra de pesquisa a sua direita" );
+        }
+    }//GEN-LAST:event_removeActionPerformed
+
+    private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
+       if(!isEmpty()){
+            Trailer trailer = new Trailer();
+            trailer.setId(Long.parseLong(id.getText()));
+            trailer.setBrand(brand.getText());
+            trailer.setModel(model.getText());
+            trailer.setYear(Integer.parseInt(year.getText()));
+            trailer.setPlate(plate.getText());
+            trailer.setCapKG(Double.parseDouble(capKG.getText()));
+            trailer.setChassi(Long.parseLong(chassi.getText()));
+            trailer.setType(type.getSelectedItem().toString());
+                   
+            try {
+                new TrailerDao().add(trailer); 
+                JOptionPane.showMessageDialog(rootPane,"Carreta inserida com sucesso");
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!\n" + e);
+            }
+            clearScreen();
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane,"Por favor preencha os campos obrigatórios");
+        } 
+    }//GEN-LAST:event_updateActionPerformed
+
+    private void findActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findActionPerformed
+        if(!byId.getText().trim().equals("")){    
+
+            try{
+               List<Trailer> trailers = (List<Trailer>) new TrailerDao().getList();
+               
+                for (Trailer trailer : trailers) {
+                    id.setText(Long.toString(trailer.getId()));
+                    brand.setText(trailer.getBrand());
+                    model.setText(trailer.getModel());
+                    year.setText(Integer.toString(trailer.getYear()));
+                    plate.setText(Long.toString(trailer.getId()));
+                    capKG.setText(Long.toString(trailer.getId()));
+                    chassi.setText(Long.toString(trailer.getId()));
+                    type.setSelectedItem(trailer.getType());                                   
+                }
+
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(rootPane,"Erro ao Consultar dados no Banco!\n" + e);
+                clearScreen();
+            }     
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Digite algo na barra de pesquisa");
+        }
+        byId.setText("");
+    }//GEN-LAST:event_findActionPerformed
+
+    private boolean isEmpty() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void clearScreen() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -204,12 +318,11 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JButton AddImage;
     private javax.swing.JLabel Home;
     private javax.swing.JLabel Image;
-    private javax.swing.JTextField KGcapacity;
-    private javax.swing.JTextField M3capacity;
     private javax.swing.JPanel TrailerData;
     private javax.swing.JButton add;
     private javax.swing.JTextField brand;
-    private javax.swing.JTextField byid;
+    private javax.swing.JTextField byId;
+    private javax.swing.JTextField capKG;
     private javax.swing.JTextField chassi;
     private javax.swing.JButton find;
     private javax.swing.JTextField id;
@@ -220,7 +333,6 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JPanel menuPanel;
@@ -231,4 +343,5 @@ public class TrailerView extends javax.swing.JFrame {
     private javax.swing.JButton update;
     private javax.swing.JTextField year;
     // End of variables declaration//GEN-END:variables
+
 }

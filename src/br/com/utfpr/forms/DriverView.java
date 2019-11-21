@@ -47,7 +47,7 @@ public class DriverView extends javax.swing.JFrame {
         rg = new javax.swing.JTextField();
         cpf = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        stats = new javax.swing.JComboBox<>();
+        stats = new javax.swing.JComboBox<String>();
         cnhNum = new javax.swing.JTextField();
         cnhType = new javax.swing.JTextField();
         expiration = new javax.swing.JTextField();
@@ -62,7 +62,7 @@ public class DriverView extends javax.swing.JFrame {
         city = new javax.swing.JTextField();
         number = new javax.swing.JTextField();
         cep = new javax.swing.JTextField();
-        uf = new javax.swing.JComboBox<>();
+        uf = new javax.swing.JComboBox<String>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -178,11 +178,17 @@ public class DriverView extends javax.swing.JFrame {
         jLabel18.setText("Catageoria:");
         jLabel18.setToolTipText("");
 
+        id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idActionPerformed(evt);
+            }
+        });
+
         name.setToolTipText("");
 
         rg.setToolTipText("");
 
-        stats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "               ", "Ativo", "Inativo" }));
+        stats.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "               ", "Ativo", "Inativo" }));
 
         cnhNum.setToolTipText("");
 
@@ -208,7 +214,7 @@ public class DriverView extends javax.swing.JFrame {
 
         city.setToolTipText("");
 
-        uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "    ", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+        uf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "    ", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
 
         javax.swing.GroupLayout AddressPanelLayout = new javax.swing.GroupLayout(AddressPanel);
         AddressPanel.setLayout(AddressPanelLayout);
@@ -607,6 +613,10 @@ public class DriverView extends javax.swing.JFrame {
     private void newDriverAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDriverAddMouseClicked
         clearScreen();
     }//GEN-LAST:event_newDriverAddMouseClicked
+
+    private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

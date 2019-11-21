@@ -28,8 +28,6 @@ public class TruckView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         Image = new javax.swing.JLabel();
         Id = new javax.swing.JTextField();
@@ -40,9 +38,7 @@ public class TruckView extends javax.swing.JFrame {
         Chassis = new javax.swing.JTextField();
         FuelTank = new javax.swing.JTextField();
         KMperL = new javax.swing.JTextField();
-        DriverPicker = new javax.swing.JComboBox<>();
-        DriverId = new javax.swing.JTextField();
-        Type = new javax.swing.JComboBox<>();
+        Type = new javax.swing.JComboBox<String>();
         AddImage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -136,14 +132,6 @@ public class TruckView extends javax.swing.JFrame {
         jLabel8.setText("Média KM/L:");
         TruckDataPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 57, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel9.setText("Motorista:");
-        TruckDataPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 57, -1, -1));
-
-        jLabel10.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jLabel10.setText("Código:");
-        TruckDataPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(256, 57, -1, -1));
-
         jLabel11.setText("Tipo veículo:");
         TruckDataPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 105, -1, -1));
         TruckDataPanel.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 230, 70));
@@ -159,9 +147,6 @@ public class TruckView extends javax.swing.JFrame {
         TruckDataPanel.add(Chassis, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 31, 81, -1));
         TruckDataPanel.add(FuelTank, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
         TruckDataPanel.add(KMperL, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 79, 63, -1));
-
-        TruckDataPanel.add(DriverPicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(332, 79, 176, -1));
-        TruckDataPanel.add(DriverId, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 59, -1));
 
         TruckDataPanel.add(Type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 126, 140, -1));
 
@@ -220,8 +205,6 @@ public class TruckView extends javax.swing.JFrame {
     private javax.swing.JButton AddImage;
     private javax.swing.JTextField Brand;
     private javax.swing.JTextField Chassis;
-    private javax.swing.JTextField DriverId;
-    private javax.swing.JComboBox<String> DriverPicker;
     private javax.swing.JButton Find;
     private javax.swing.JTextField FuelTank;
     private javax.swing.JLabel Home;
@@ -237,7 +220,6 @@ public class TruckView extends javax.swing.JFrame {
     private javax.swing.JTextField Year;
     private javax.swing.JTextField byid;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
@@ -247,7 +229,6 @@ public class TruckView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel menuPanel;
     // End of variables declaration//GEN-END:variables
 }
