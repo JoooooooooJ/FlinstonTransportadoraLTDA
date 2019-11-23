@@ -3,7 +3,6 @@ package br.com.utfpr.dao.impl;
 
 import br.com.utfpr.beans.Trailer;
 import br.com.utfpr.dao.ConnectionBuilder;
-import br.com.utfpr.dao.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,8 +10,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import br.com.utfpr.dao.Dao;
 
-public class TrailerDao implements DAO<Trailer>{
+public class TrailerDao implements Dao<Trailer>{
 
     @Override
     public void add(Object obj) {
@@ -71,7 +71,7 @@ public class TrailerDao implements DAO<Trailer>{
             Connection con;
             con = new ConnectionBuilder().getConnection();
             Trailer trailer = (Trailer) obj;
-            String sql = "UPDATE carreta set marca=?,modelo=?,ano=?,placa =?"
+            String sql = "update carreta set marca=?,modelo=?,ano=?,placa =?"
                       +  "capCarga =? ,chassi =? ,tipo = ? where cod = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1,trailer.getBrand());

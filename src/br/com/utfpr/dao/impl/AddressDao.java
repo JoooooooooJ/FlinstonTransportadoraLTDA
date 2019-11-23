@@ -1,6 +1,5 @@
 package br.com.utfpr.dao.impl;
 
-import br.com.utfpr.dao.DAO;
 import br.com.utfpr.dao.ConnectionBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +9,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import br.com.utfpr.beans.Address;
+import br.com.utfpr.dao.Dao;
 
-public class AddressDao implements DAO<Address>{
+public class AddressDao implements Dao<Address>{
 
     @Override
     public void add(Object obj) {

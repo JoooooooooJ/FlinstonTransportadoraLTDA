@@ -2,7 +2,7 @@ package br.com.utfpr.dao;
 
 import java.util.Collection;
 
-public interface DAO<T> {
+public interface Dao<T> {
     
     public void add(Object obj);
     

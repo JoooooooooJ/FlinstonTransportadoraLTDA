@@ -2,7 +2,6 @@ package br.com.utfpr.dao.impl;
 
 import br.com.utfpr.beans.Address;
 import br.com.utfpr.dao.ConnectionBuilder;
-import br.com.utfpr.dao.DAO;
 import br.com.utfpr.beans.Driver;
 import java.sql.Connection;
 import java.sql.Date;
@@ -13,8 +12,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
+import br.com.utfpr.dao.Dao;
 
-public class DriverDao implements DAO<Driver> {
+public class DriverDao implements Dao<Driver> {
 
     @Override
     public void add(Object obj) {
@@ -56,7 +56,7 @@ public class DriverDao implements DAO<Driver> {
         
         try(Connection con = new ConnectionBuilder().getConnection()){            
             Driver driver = (Driver) obj;
-            DAO<Address> address = new AddressDao();
+            Dao<Address> address = new AddressDao();
             Address ad = new Address();
             ad.setId(driver.getAddress().getId());
             try{
