@@ -19,7 +19,7 @@ public class TruckDao implements Dao<Truck>{
             Connection con;
             con = new ConnectionBuilder().getConnection();
             Truck truck = (Truck) obj;
-            String sql = "insert int caminhao (codCaminhao,marca,modelo ,ano ,placa ,chassi ,capTanque, kml)"
+            String sql = "insert into caminhao (codCaminhao,marca,modelo ,ano ,placa ,chassi ,capTanque, kml)"
                     + "values(?,?,?,?,?,?,?,?)";                        
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, truck.getId());
