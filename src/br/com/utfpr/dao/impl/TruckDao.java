@@ -100,7 +100,7 @@ public class TruckDao implements Dao<Truck>{
             ResultSet rs = stmt.executeQuery();
             while(rs.next())
             {
-                truck.setId(rs.getLong("cod"));
+                truck.setId(rs.getLong("codCaminhao"));
                 truck.setBrand(rs.getString("marca"));
                 truck.setModel(rs.getString("modelo"));
                 truck.setYear(rs.getInt("ano"));
@@ -130,7 +130,7 @@ public class TruckDao implements Dao<Truck>{
             while(rs.next())
             {
                 Truck truck = new Truck();
-                truck.setId(rs.getLong("cod"));
+                truck.setId(rs.getLong("codCaminhao"));
                 truck.setBrand(rs.getString("marca"));
                 truck.setModel(rs.getString("modelo"));
                 truck.setYear(rs.getInt("ano"));
