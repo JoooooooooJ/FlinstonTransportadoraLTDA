@@ -407,77 +407,6 @@ public class DriverView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private Driver newDriver(){
-        Address address = new Address();
-            address.setId(Long.parseLong(id.getText()));
-            address.setStreet(street.getText());
-            address.setNumber(Integer.parseInt(number.getText()));
-            address.setCity(city.getText());
-            address.setCEP(cep.getText());
-            address.setUF(uf.getSelectedItem().toString()); 
-            //
-            Driver driver = new Driver();        
-            driver.setId(Long.parseLong(id.getText()));
-            driver.setName(name.getText());
-            driver.setPhone(phone.getText());
-            driver.setRG(Long.parseLong(rg.getText()));
-            driver.setCPF(Long.parseLong(cpf.getText()));
-            driver.setEmail(email.getText());
-            driver.setCNHnum(Long.parseLong(cnhNum.getText()));
-            driver.setCNHtype(cnhType.getText());
-            Calendar expiration = null ;
-            Date date;
-            try {
-
-                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
-                expiration = Calendar.getInstance();
-                expiration.setTime(date);         
-
-            }catch (ParseException e){
-                JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
-            } 
-            driver.setExpiration(expiration);
-            if(stats.getSelectedIndex()==1)
-                driver.setStatus(true);
-            else
-                driver.setStatus(false);
-            driver.setAddress(address);            
-        return driver;
-    }
-    
-    private void clearScreen(){
-        
-        id.setText("");
-        name.setText("");
-        phone.setText("");
-        rg.setText("");
-        cpf.setText("");
-        email.setText("");
-        cnhNum.setText("");
-        cnhType.setText("");
-        expiration.setText("");
-        stats.setSelectedIndex(0);
-        street.setText("");
-        number.setText("");
-        city.setText("");
-        cep.setText("");
-        uf.setSelectedIndex(0);
-    }
-    
-    private boolean isEmpty(){
-        return  id.getText().trim().equals("")&&
-                name.getText().trim().equals("")&&               
-                rg.getText().trim().equals("")&&
-                cpf.getText().trim().equals("")&&
-                cnhNum.getText().trim().equals("")&&
-                cnhType.getText().trim().equals("")&&
-                expiration.getText().trim().equals("")&&
-                street.getText().trim().equals("")&&
-                number.getText().trim().equals("")&&
-                city.getText().trim().equals("")&&
-                cep.getText().trim().equals("");
-    }
     
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
         
@@ -582,6 +511,78 @@ public class DriverView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_idActionPerformed
 
+    private Driver newDriver(){
+        Address address = new Address();
+            address.setId(Long.parseLong(id.getText()));
+            address.setStreet(street.getText());
+            address.setNumber(Integer.parseInt(number.getText()));
+            address.setCity(city.getText());
+            address.setCEP(cep.getText());
+            address.setUF(uf.getSelectedItem().toString()); 
+            //
+            Driver driver = new Driver();        
+            driver.setId(Long.parseLong(id.getText()));
+            driver.setName(name.getText());
+            driver.setPhone(phone.getText());
+            driver.setRG(Long.parseLong(rg.getText()));
+            driver.setCPF(Long.parseLong(cpf.getText()));
+            driver.setEmail(email.getText());
+            driver.setCNHnum(Long.parseLong(cnhNum.getText()));
+            driver.setCNHtype(cnhType.getText());
+            Calendar expiration = null ;
+            Date date;
+            try {
+
+                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
+                expiration = Calendar.getInstance();
+                expiration.setTime(date);         
+
+            }catch (ParseException e){
+                JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
+            } 
+            driver.setExpiration(expiration);
+            if(stats.getSelectedIndex()==1)
+                driver.setStatus(true);
+            else
+                driver.setStatus(false);
+            driver.setAddress(address);            
+        return driver;
+    }
+    
+    private void clearScreen(){
+        
+        id.setText("");
+        name.setText("");
+        phone.setText("");
+        rg.setText("");
+        cpf.setText("");
+        email.setText("");
+        cnhNum.setText("");
+        cnhType.setText("");
+        expiration.setText("");
+        stats.setSelectedIndex(0);
+        street.setText("");
+        number.setText("");
+        city.setText("");
+        cep.setText("");
+        uf.setSelectedIndex(0);
+    }
+    
+    private boolean isEmpty(){
+        return  id.getText().trim().equals("")&&
+                name.getText().trim().equals("")&&               
+                rg.getText().trim().equals("")&&
+                cpf.getText().trim().equals("")&&
+                cnhNum.getText().trim().equals("")&&
+                cnhType.getText().trim().equals("")&&
+                expiration.getText().trim().equals("")&&
+                street.getText().trim().equals("")&&
+                number.getText().trim().equals("")&&
+                city.getText().trim().equals("")&&
+                cep.getText().trim().equals("");
+    }
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
