@@ -2,12 +2,12 @@ package br.com.utfpr.forms;
 
 import br.com.utfpr.beans.Driver;
 import br.com.utfpr.dao.impl.DriverDao;
-import br.com.utfpr.forms.MainView;
+import br.com.utfpr.forms.MainForm;
 import java.util.List;
 
-public class AffreightmentView extends javax.swing.JFrame {
+public class FreightForm extends javax.swing.JFrame {
 
-    public AffreightmentView() {
+    public FreightForm() {
         initComponents();
         setLocationRelativeTo(null);
         startAllCheckbox();
@@ -224,7 +224,7 @@ public class AffreightmentView extends javax.swing.JFrame {
 
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         dispose();
-        new MainView().show();
+        new MainForm().show();
     }//GEN-LAST:event_cancelActionPerformed
 
     public void startAllCheckbox(){
@@ -248,14 +248,30 @@ public class AffreightmentView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AffreightmentView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FreightForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AffreightmentView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FreightForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AffreightmentView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FreightForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AffreightmentView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FreightForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -276,7 +292,7 @@ public class AffreightmentView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AffreightmentView().setVisible(true);
+                new FreightForm().setVisible(true);
             }
         });
     }

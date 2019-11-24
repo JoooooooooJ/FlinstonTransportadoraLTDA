@@ -3,9 +3,9 @@ package br.com.utfpr.forms;
 import java.awt.Color;
 
 
-public class MainView extends javax.swing.JFrame {
+public class MainForm extends javax.swing.JFrame {
     
-    public MainView() {
+    public MainForm() {
         initComponents();
         mainBackgroundPanel.setBackground(new Color(2,48,74,200));   
         setLocationRelativeTo(null);
@@ -103,25 +103,25 @@ public class MainView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTruckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTruckActionPerformed
-        new br.com.utfpr.forms.TruckView().show();
+        new br.com.utfpr.forms.TruckForm().show();
         dispose();
     }//GEN-LAST:event_btnTruckActionPerformed
 
     private void btnTruckloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTruckloadActionPerformed
         // TODO add your handling code here:
-        new br.com.utfpr.forms.TrailerView().show();
+        new br.com.utfpr.forms.TrailerForm().show();
         dispose();
     }//GEN-LAST:event_btnTruckloadActionPerformed
 
     private void btnDriverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDriverActionPerformed
         // TODO add your handling code here:
-        new br.com.utfpr.forms.DriverView().show();
+        new br.com.utfpr.forms.DriverForm().show();
         dispose();
     }//GEN-LAST:event_btnDriverActionPerformed
 
     private void btnMainSystemMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMainSystemMouseClicked
         // TODO add your handling code here:
-        new br.com.utfpr.forms.AffreightmentView().show();
+        new br.com.utfpr.forms.FreightForm().show();
         dispose();        
     }//GEN-LAST:event_btnMainSystemMouseClicked
 
@@ -139,20 +139,21 @@ public class MainView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainView().setVisible(true);
+                new MainForm().setVisible(true);
             }
         });
     }

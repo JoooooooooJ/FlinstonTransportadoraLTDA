@@ -28,7 +28,7 @@ public class TrailerDao implements Dao<Trailer>{
             stmt.setString(3,trailer.getModel());
             stmt.setInt(4,trailer.getYear());
             stmt.setString(5,trailer.getPlate());
-            stmt.setDouble(6,trailer.getCapKG());
+            stmt.setLong(6,trailer.getCapKG());
             stmt.setLong(7,trailer.getChassi());
             stmt.setString(8,trailer.getType());
             
@@ -78,7 +78,7 @@ public class TrailerDao implements Dao<Trailer>{
             stmt.setString(2,trailer.getModel());
             stmt.setInt(3,trailer.getYear());
             stmt.setString(4,trailer.getPlate());
-            stmt.setDouble(5,trailer.getCapKG());
+            stmt.setLong(5,trailer.getCapKG());
             stmt.setLong(6,trailer.getChassi());
             stmt.setString(7,trailer.getType());
             stmt.setLong(8, trailer.getId());
@@ -111,7 +111,7 @@ public class TrailerDao implements Dao<Trailer>{
                 trailer.setModel(rs.getString("modelo"));
                 trailer.setYear(rs.getInt("ano"));
                 trailer.setPlate(rs.getString("placa"));
-                trailer.setCapKG(rs.getDouble("capCarga"));
+                trailer.setCapKG(rs.getLong("capCarga"));
                 trailer.setChassi(rs.getLong("chassi"));
                 trailer.setType(rs.getString("tipo"));        
             }            
@@ -141,7 +141,7 @@ public class TrailerDao implements Dao<Trailer>{
                 trailer.setModel(rs.getString("modelo"));
                 trailer.setYear(rs.getInt("ano"));
                 trailer.setPlate(rs.getString("placa"));
-                trailer.setCapKG(rs.getDouble("capCarga"));
+                trailer.setCapKG(rs.getLong("capCarga"));
                 trailer.setChassi(rs.getLong("chassi"));
                 trailer.setType(rs.getString("tipo"));
                 trailerList.add(trailer);

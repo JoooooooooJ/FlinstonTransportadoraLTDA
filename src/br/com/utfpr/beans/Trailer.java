@@ -7,7 +7,7 @@ public class Trailer {
     private String model;
     private int year;
     private String plate;
-    private double capKG;
+    private long capKG;
     private long chassi;
     private String type;
 
@@ -51,11 +51,11 @@ public class Trailer {
         this.plate = plate;
     }
 
-    public double getCapKG() {
+    public long getCapKG() {
         return capKG;
     }
 
-    public void setCapKG(double capKG) {
+    public void setCapKG(long capKG) {
         this.capKG = capKG;
     }
     public long getChassi() {

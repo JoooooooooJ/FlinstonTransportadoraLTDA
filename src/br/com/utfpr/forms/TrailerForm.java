@@ -4,10 +4,10 @@ import br.com.utfpr.beans.Trailer;
 import br.com.utfpr.dao.impl.TrailerDao;
 import javax.swing.JOptionPane;
 
-public class TrailerView extends javax.swing.JFrame {
+public class TrailerForm extends javax.swing.JFrame {
     private Object porId;
 
-    public TrailerView() {
+    public TrailerForm() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -95,7 +95,7 @@ public class TrailerView extends javax.swing.JFrame {
         TrailerData.add(chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 81, -1));
         TrailerData.add(capKG, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
 
-        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Simples", "Dupla", "Tripla", " " }));
+        type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simples", "Dupla", "Tripla" }));
         TrailerData.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 125, 140, -1));
 
         AddImage.setText("Adicionar Imagem");
@@ -174,7 +174,7 @@ public class TrailerView extends javax.swing.JFrame {
 
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
         // TODO add your handling code here:
-        new br.com.utfpr.forms.MainView().show();
+        new br.com.utfpr.forms.MainForm().show();
         dispose();
     }//GEN-LAST:event_HomeMouseClicked
 
@@ -236,7 +236,7 @@ public class TrailerView extends javax.swing.JFrame {
                 model.setText(trailer.getModel());
                 year.setText(Integer.toString(trailer.getYear()));
                 plate.setText(trailer.getPlate());
-                capKG.setText(Double.toString(trailer.getCapKG()));
+                capKG.setText(Long.toString(trailer.getCapKG()));
                 chassi.setText(Long.toString(trailer.getChassi()));
                 type.setSelectedItem(trailer.getType());
             }catch(RuntimeException e){
@@ -269,7 +269,7 @@ public class TrailerView extends javax.swing.JFrame {
         plate.setText("");
         capKG.setText("");
         chassi.setText("");
-        type.setSelectedItem("");    
+        type.setSelectedIndex(1);
         
     }
     
@@ -280,7 +280,7 @@ public class TrailerView extends javax.swing.JFrame {
             trailer.setModel(model.getText());
             trailer.setYear(Integer.parseInt(year.getText()));
             trailer.setPlate(plate.getText());
-            trailer.setCapKG(Double.parseDouble(capKG.getText()));
+            trailer.setCapKG(Long.parseLong(capKG.getText()));
             trailer.setChassi(Long.parseLong(chassi.getText()));
             trailer.setType(type.getSelectedItem().toString());
         return trailer;
@@ -300,20 +300,21 @@ public class TrailerView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrailerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrailerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrailerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrailerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrailerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrailerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrailerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrailerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrailerView().setVisible(true);
+                new TrailerForm().setVisible(true);
             }
         });
     }

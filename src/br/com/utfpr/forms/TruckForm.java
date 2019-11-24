@@ -4,9 +4,9 @@ import br.com.utfpr.beans.Truck;
 import br.com.utfpr.dao.impl.TruckDao;
 import javax.swing.JOptionPane;
 
-public class TruckView extends javax.swing.JFrame {
+public class TruckForm extends javax.swing.JFrame {
 
-    public TruckView() {
+    public TruckForm() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -185,7 +185,7 @@ public class TruckView extends javax.swing.JFrame {
 
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
         // TODO add your handling code here:
-        new br.com.utfpr.forms.MainView().show();
+        new br.com.utfpr.forms.MainForm().show();
         dispose();
     }//GEN-LAST:event_HomeMouseClicked
 
@@ -281,20 +281,21 @@ public class TruckView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TruckView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TruckForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TruckView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TruckForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TruckView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TruckForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TruckView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TruckForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TruckView().setVisible(true);
+                new TruckForm().setVisible(true);
             }
         });
     }

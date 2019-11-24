@@ -9,9 +9,9 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class DriverView extends javax.swing.JFrame {
+public class DriverForm extends javax.swing.JFrame {
 
-    public DriverView() {
+    public DriverForm() {
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -47,7 +47,7 @@ public class DriverView extends javax.swing.JFrame {
         rg = new javax.swing.JTextField();
         cpf = new javax.swing.JTextField();
         email = new javax.swing.JTextField();
-        stats = new javax.swing.JComboBox<String>();
+        stats = new javax.swing.JComboBox<>();
         cnhNum = new javax.swing.JTextField();
         cnhType = new javax.swing.JTextField();
         expiration = new javax.swing.JTextField();
@@ -62,7 +62,7 @@ public class DriverView extends javax.swing.JFrame {
         city = new javax.swing.JTextField();
         number = new javax.swing.JTextField();
         cep = new javax.swing.JTextField();
-        uf = new javax.swing.JComboBox<String>();
+        uf = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -188,7 +188,7 @@ public class DriverView extends javax.swing.JFrame {
 
         rg.setToolTipText("");
 
-        stats.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "               ", "Ativo", "Inativo" }));
+        stats.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "               ", "Ativo", "Inativo" }));
 
         cnhNum.setToolTipText("");
 
@@ -214,7 +214,7 @@ public class DriverView extends javax.swing.JFrame {
 
         city.setToolTipText("");
 
-        uf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "    ", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
+        uf.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "    ", "AC", "AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA", "MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ", "RN", "RO", "RR", "RS", "SC", "SE", "SP", "TO" }));
 
         javax.swing.GroupLayout AddressPanelLayout = new javax.swing.GroupLayout(AddressPanel);
         AddressPanel.setLayout(AddressPanelLayout);
@@ -410,7 +410,7 @@ public class DriverView extends javax.swing.JFrame {
     
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
         
-        new br.com.utfpr.forms.MainView().show();
+        new br.com.utfpr.forms.MainForm().show();
         dispose();
     }//GEN-LAST:event_HomeMouseClicked
 
@@ -597,20 +597,21 @@ public class DriverView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DriverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DriverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DriverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DriverView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DriverForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DriverView().setVisible(true);
+                new DriverForm().setVisible(true);
             }
         });
     }
