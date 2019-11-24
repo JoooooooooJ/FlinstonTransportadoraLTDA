@@ -7,7 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class TruckDao implements Dao<Truck>{
 
@@ -41,7 +43,21 @@ public class TruckDao implements Dao<Truck>{
 
     @Override
     public void remove(Object obj) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       try(Connection con = new ConnectionBuilder().getConnection()){            
+            Truck truck = (Truck) obj;
+            String sql = "delete from caminhao where codCaminhao=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1,truck.getId());
+            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -78,7 +94,7 @@ public class TruckDao implements Dao<Truck>{
     public Object read(long id) {
         try(Connection con = new ConnectionBuilder().getConnection()){            
             Truck truck = new Truck();
-            String sql = "select * from carreta where cod=?";
+            String sql = "select * from caminhao where codCaminhao=?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1,id);                        
             ResultSet rs = stmt.executeQuery();
@@ -106,14 +122,14 @@ public class TruckDao implements Dao<Truck>{
 
     @Override
     public Collection<Truck> getList() {
-        try(Connection con = new ConnectionBuilder().getConnection()){            
-            Truck truck = new Truck();
-            String sql = "select * from carreta where cod=?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setLong(1,id);                        
+        try(Connection con = new ConnectionBuilder().getConnection()){           
+            List<Truck> trucklist = new ArrayList<>();
+            String sql = "select * from caminhao";
+            PreparedStatement stmt = con.prepareStatement(sql);                        
             ResultSet rs = stmt.executeQuery();
             while(rs.next())
             {
+                Truck truck = new Truck();
                 truck.setId(rs.getLong("cod"));
                 truck.setBrand(rs.getString("marca"));
                 truck.setModel(rs.getString("modelo"));
@@ -121,12 +137,13 @@ public class TruckDao implements Dao<Truck>{
                 truck.setPlate(rs.getString("placa"));
                 truck.setChassi(rs.getString("chassi"));
                 truck.setGasTank(rs.getLong("capTanque"));
-                truck.setKML(rs.getInt("kml"));        
+                truck.setKML(rs.getInt("kml"));
+                trucklist.add(truck);
             }            
             stmt.close();           
             con.close();
             
-            return truck;
+            return trucklist;
             
         }catch(SQLException e){
             

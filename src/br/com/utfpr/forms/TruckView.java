@@ -1,5 +1,9 @@
 package br.com.utfpr.forms;
 
+import br.com.utfpr.beans.Truck;
+import br.com.utfpr.dao.impl.TruckDao;
+import javax.swing.JOptionPane;
+
 public class TruckView extends javax.swing.JFrame {
 
     public TruckView() {
@@ -28,17 +32,15 @@ public class TruckView extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
         Image = new javax.swing.JLabel();
-        Id = new javax.swing.JTextField();
-        Brand = new javax.swing.JTextField();
-        Modell = new javax.swing.JTextField();
-        Year = new javax.swing.JTextField();
-        Plate = new javax.swing.JTextField();
-        Chassis = new javax.swing.JTextField();
-        FuelTank = new javax.swing.JTextField();
-        KMperL = new javax.swing.JTextField();
-        Type = new javax.swing.JComboBox<String>();
+        id = new javax.swing.JTextField();
+        brand = new javax.swing.JTextField();
+        model = new javax.swing.JTextField();
+        year = new javax.swing.JTextField();
+        plate = new javax.swing.JTextField();
+        chassi = new javax.swing.JTextField();
+        capTank = new javax.swing.JTextField();
+        kml = new javax.swing.JTextField();
         AddImage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,6 +76,11 @@ public class TruckView extends javax.swing.JFrame {
         Remove.setToolTipText("remover Motorista cadastrado");
         Remove.setBorder(null);
         Remove.setBorderPainted(false);
+        Remove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveActionPerformed(evt);
+            }
+        });
         menuPanel.add(Remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 0, 80, 110));
 
         Find.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -81,6 +88,11 @@ public class TruckView extends javax.swing.JFrame {
         Find.setToolTipText("buscar Motorista");
         Find.setBorder(null);
         Find.setBorderPainted(false);
+        Find.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FindActionPerformed(evt);
+            }
+        });
         menuPanel.add(Find, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, 80, 110));
 
         Update.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
@@ -88,6 +100,11 @@ public class TruckView extends javax.swing.JFrame {
         Update.setToolTipText("atualizar cadastro de Motorista");
         Update.setBorder(null);
         Update.setBorderPainted(false);
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
         menuPanel.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 80, 110));
         menuPanel.add(byid, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 180, -1));
 
@@ -131,35 +148,38 @@ public class TruckView extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel8.setText("Média KM/L:");
         TruckDataPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 57, -1, -1));
+        TruckDataPanel.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 230, 70));
+        TruckDataPanel.add(id, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 31, 63, -1));
 
-        jLabel11.setText("Tipo veículo:");
-        TruckDataPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 105, -1, -1));
-        TruckDataPanel.add(Image, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 230, 70));
-        TruckDataPanel.add(Id, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 31, 63, -1));
+        brand.setToolTipText("");
+        TruckDataPanel.add(brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 31, 64, -1));
 
-        Brand.setToolTipText("");
-        TruckDataPanel.add(Brand, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 31, 64, -1));
-
-        Modell.setToolTipText("");
-        TruckDataPanel.add(Modell, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 31, 72, -1));
-        TruckDataPanel.add(Year, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 31, 70, -1));
-        TruckDataPanel.add(Plate, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 31, 90, -1));
-        TruckDataPanel.add(Chassis, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 31, 81, -1));
-        TruckDataPanel.add(FuelTank, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
-        TruckDataPanel.add(KMperL, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 79, 63, -1));
-
-        TruckDataPanel.add(Type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 126, 140, -1));
+        model.setToolTipText("");
+        TruckDataPanel.add(model, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 31, 72, -1));
+        TruckDataPanel.add(year, new org.netbeans.lib.awtextra.AbsoluteConstraints(255, 31, 70, -1));
+        TruckDataPanel.add(plate, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 31, 90, -1));
+        TruckDataPanel.add(chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 31, 81, -1));
+        TruckDataPanel.add(capTank, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
+        TruckDataPanel.add(kml, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 79, 63, -1));
 
         AddImage.setText("Adicionar Imagem");
-        TruckDataPanel.add(AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 120, 40));
+        TruckDataPanel.add(AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 120, 40));
 
-        getContentPane().add(TruckDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 520, 210));
+        getContentPane().add(TruckDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 520, 180));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
-        // TODO add your handling code here:
+        if(!isEmpty()){
+            try{
+                new TruckDao().add(newTruck());
+                JOptionPane.showMessageDialog(rootPane, "Caminhão inerido com sucesso!");
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(rootPane, "Erro ao inserir no banco de dados!\n" +e);
+            }
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Por favor preencha os campos obrigatórios!");
     }//GEN-LAST:event_AddActionPerformed
 
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
@@ -168,6 +188,59 @@ public class TruckView extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_HomeMouseClicked
 
+    private void RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveActionPerformed
+        if(!id.getText().trim().equals("")){
+            try{
+            new TruckDao().remove(Long.parseLong(id.getText()));
+            }catch(RuntimeException e){
+
+            }
+        }
+    }//GEN-LAST:event_RemoveActionPerformed
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+         if(!isEmpty()){
+            try{
+                new TruckDao().update(newTruck());
+                JOptionPane.showMessageDialog(rootPane, "Caminhão inerido com sucesso!");
+            }catch(RuntimeException e){
+                JOptionPane.showMessageDialog(rootPane, "Erro ao inserir no banco de dados!\n" +e);
+            }
+        }else
+            JOptionPane.showMessageDialog(rootPane, "Por favor preencha os campos obrigatórios!");
+    }//GEN-LAST:event_UpdateActionPerformed
+
+    private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_FindActionPerformed
+
+    private boolean isEmpty(){
+        return id.getText().trim().equals("") &&
+                brand.getText().trim().equals("")&&
+                model.getText().trim().equals("")&&
+                year.getText().trim().equals("")&&
+                plate.getText().trim().equals("")&&
+                capTank.getText().trim().equals("")&&
+                chassi.getText().trim().equals("")&&
+                kml.getText().trim().equals("");
+    } 
+    
+    private Truck newTruck(){
+        Truck truck = new Truck();
+        
+        truck.setId(Long.parseLong(id.getText()));
+        truck.setBrand(brand.getText());
+        truck.setModel(model.getText());
+        truck.setYear(Integer.parseInt(year.getText()));
+        truck.setPlate(plate.getText());
+        truck.setChassi(chassi.getText());
+        truck.setGasTank(Double.parseDouble(capTank.getText()));
+        truck.setKML(Integer.parseInt(kml.getText()));
+        
+        return truck;
+        
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -203,24 +276,18 @@ public class TruckView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Add;
     private javax.swing.JButton AddImage;
-    private javax.swing.JTextField Brand;
-    private javax.swing.JTextField Chassis;
     private javax.swing.JButton Find;
-    private javax.swing.JTextField FuelTank;
     private javax.swing.JLabel Home;
-    private javax.swing.JTextField Id;
     private javax.swing.JLabel Image;
-    private javax.swing.JTextField KMperL;
-    private javax.swing.JTextField Modell;
-    private javax.swing.JTextField Plate;
     private javax.swing.JButton Remove;
     private javax.swing.JPanel TruckDataPanel;
-    private javax.swing.JComboBox<String> Type;
     private javax.swing.JButton Update;
-    private javax.swing.JTextField Year;
+    private javax.swing.JTextField brand;
     private javax.swing.JTextField byid;
+    private javax.swing.JTextField capTank;
+    private javax.swing.JTextField chassi;
+    private javax.swing.JTextField id;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
@@ -229,6 +296,10 @@ public class TruckView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField kml;
     private javax.swing.JPanel menuPanel;
+    private javax.swing.JTextField model;
+    private javax.swing.JTextField plate;
+    private javax.swing.JTextField year;
     // End of variables declaration//GEN-END:variables
 }

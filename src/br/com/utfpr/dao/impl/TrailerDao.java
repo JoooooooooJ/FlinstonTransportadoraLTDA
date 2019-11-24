@@ -47,7 +47,7 @@ public class TrailerDao implements Dao<Trailer>{
 
     @Override
     public void remove(Object obj) {
-               try(Connection con = new ConnectionBuilder().getConnection()){            
+        try(Connection con = new ConnectionBuilder().getConnection()){            
             Trailer trailer = (Trailer) obj;
             String sql = "delete from carreta where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);
