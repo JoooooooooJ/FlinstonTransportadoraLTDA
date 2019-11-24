@@ -408,6 +408,44 @@ public class DriverView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private Driver newDriver(){
+        Address address = new Address();
+            address.setId(Long.parseLong(id.getText()));
+            address.setStreet(street.getText());
+            address.setNumber(Integer.parseInt(number.getText()));
+            address.setCity(city.getText());
+            address.setCEP(cep.getText());
+            address.setUF(uf.getSelectedItem().toString()); 
+            //
+            Driver driver = new Driver();        
+            driver.setId(Long.parseLong(id.getText()));
+            driver.setName(name.getText());
+            driver.setPhone(phone.getText());
+            driver.setRG(Long.parseLong(rg.getText()));
+            driver.setCPF(Long.parseLong(cpf.getText()));
+            driver.setEmail(email.getText());
+            driver.setCNHnum(Long.parseLong(cnhNum.getText()));
+            driver.setCNHtype(cnhType.getText());
+            Calendar expiration = null ;
+            Date date;
+            try {
+
+                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
+                expiration = Calendar.getInstance();
+                expiration.setTime(date);         
+
+            }catch (ParseException e){
+                JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
+            } 
+            driver.setExpiration(expiration);
+            if(stats.getSelectedIndex()==1)
+                driver.setStatus(true);
+            else
+                driver.setStatus(false);
+            driver.setAddress(address);            
+        return driver;
+    }
+    
     private void clearScreen(){
         
         id.setText("");
@@ -449,43 +487,9 @@ public class DriverView extends javax.swing.JFrame {
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
          
-        if(!isEmpty()){
-            Address address = new Address();
-            address.setId(Long.parseLong(id.getText()));
-            address.setStreet(street.getText());
-            address.setNumber(Integer.parseInt(number.getText()));
-            address.setCity(city.getText());
-            address.setCEP(cep.getText());
-            address.setUF(uf.getSelectedItem().toString()); 
-            //
-            Driver driver = new Driver();        
-            driver.setId(Long.parseLong(id.getText()));
-            driver.setName(name.getText());
-            driver.setPhone(phone.getText());
-            driver.setRG(Long.parseLong(rg.getText()));
-            driver.setCPF(Long.parseLong(cpf.getText()));
-            driver.setEmail(email.getText());
-            driver.setCNHnum(Long.parseLong(cnhNum.getText()));
-            driver.setCNHtype(cnhType.getText());
-            Calendar expiration = null ;
-            Date date;
+        if(!isEmpty()){                       
             try {
-
-                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
-                expiration = Calendar.getInstance();
-                expiration.setTime(date);         
-
-            }catch (ParseException e){
-                JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
-            } 
-            driver.setExpiration(expiration);
-            if(stats.getSelectedIndex()==1)
-                driver.setStatus(true);
-            else
-                driver.setStatus(false);
-            driver.setAddress(address);           
-            try {
-                new DriverDao().add(driver); 
+                new DriverDao().add(newDriver()); 
                 JOptionPane.showMessageDialog(rootPane,"Motorista inserido com sucesso");
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!\n" + e);
@@ -500,14 +504,8 @@ public class DriverView extends javax.swing.JFrame {
     private void RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveActionPerformed
               
          if(!isEmpty()){
-             DriverDao rm = new DriverDao();
-            Driver driver = new Driver();
-            driver.setId(Long.parseLong(id.getText()));
-            Address address = new Address();
-            address.setId(Long.parseLong(id.getText()));
-            driver.setAddress(address);
             try{
-                rm.remove(driver);
+                new DriverDao().remove(newDriver());
                 JOptionPane.showMessageDialog(rootPane,"Motorista excluido com sucesso");
             }catch(RuntimeException e){
 
@@ -522,43 +520,9 @@ public class DriverView extends javax.swing.JFrame {
 
     private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
    
-        if(!isEmpty()){
-            Address address = new Address();
-            address.setId(Long.parseLong(id.getText()));
-            address.setStreet(street.getText());
-            address.setNumber(Integer.parseInt(number.getText()));
-            address.setCity(city.getText());
-            address.setCEP(cep.getText());
-            address.setUF(uf.getSelectedItem().toString()); 
-            //
-            Driver driver = new Driver();        
-            driver.setId(Long.parseLong(id.getText()));
-            driver.setName(name.getText());
-            driver.setPhone(phone.getText());
-            driver.setRG(Long.parseLong(rg.getText()));
-            driver.setCPF(Long.parseLong(cpf.getText()));
-            driver.setEmail(email.getText());
-            driver.setCNHnum(Long.parseLong(cnhNum.getText()));
-            driver.setCNHtype(cnhType.getText());
-            Calendar expiration = null ;
-            Date date;
+        if(!isEmpty()){          
             try {
-
-                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
-                expiration = Calendar.getInstance();
-                expiration.setTime(date);         
-
-            }catch (ParseException e){
-                JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
-            } 
-            driver.setExpiration(expiration);
-            if(stats.getSelectedIndex()==1)
-                driver.setStatus(true);
-            else
-                driver.setStatus(false);
-            driver.setAddress(address);           
-            try {
-                new DriverDao().update(driver);   
+                new DriverDao().update(newDriver());   
                 JOptionPane.showMessageDialog(rootPane,"Dados atualizados com sucesso");
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!\n" + e);

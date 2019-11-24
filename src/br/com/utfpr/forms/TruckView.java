@@ -178,6 +178,7 @@ public class TruckView extends javax.swing.JFrame {
             }catch(RuntimeException e){
                 JOptionPane.showMessageDialog(rootPane, "Erro ao inserir no banco de dados!\n" +e);
             }
+            //clearScreen();
         }else
             JOptionPane.showMessageDialog(rootPane, "Por favor preencha os campos obrigatórios!");
     }//GEN-LAST:event_AddActionPerformed
@@ -189,12 +190,18 @@ public class TruckView extends javax.swing.JFrame {
     }//GEN-LAST:event_HomeMouseClicked
 
     private void RemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveActionPerformed
-        if(!id.getText().trim().equals("")){
+        if(!isEmpty()){                        
             try{
-            new TruckDao().remove(Long.parseLong(id.getText()));
+                new TruckDao().remove(newTruck());
+                JOptionPane.showMessageDialog(rootPane,"Carreta excluida com sucesso");
             }catch(RuntimeException e){
 
+                JOptionPane.showMessageDialog(rootPane,"Erro o excluir dados do banco\n" + e);
             }
+            //clearScreen();
+         }else{
+             JOptionPane.showMessageDialog(rootPane,"Para excluir dados é preciso primeiro carregá-los\n"
+                                                    + "Utilize a barra de pesquisa a sua direita" );
         }
     }//GEN-LAST:event_RemoveActionPerformed
 
@@ -207,11 +214,30 @@ public class TruckView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Erro ao inserir no banco de dados!\n" +e);
             }
         }else
-            JOptionPane.showMessageDialog(rootPane, "Por favor preencha os campos obrigatórios!");
+            JOptionPane.showMessageDialog(rootPane, "Para atualizar dados é preciso primeiro carregá-los\n"
+                                                    + "Utilize a barra de pesquisa a sua direita");
     }//GEN-LAST:event_UpdateActionPerformed
 
     private void FindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindActionPerformed
-        // TODO add your handling code here:
+        if(!byid.getText().trim().equals("")){
+            try {
+                Truck truck = (Truck) new TruckDao().read(Long.parseLong(byid.getText()));                
+                id.setText(Long.toString(truck.getId()));
+                brand.setText(truck.getBrand());
+                model.setText(truck.getModel());
+                year.setText(Integer.toString(truck.getYear()));
+                plate.setText(truck.getPlate());                
+                chassi.setText(truck.getChassi());
+                capTank.setText(Double.toString(truck.getGasTank()));
+                kml.setText(Integer.toString(truck.getKML()));                
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(rootPane,"Erro ao Consultar dados no Banco!\n" + e);
+                //clearScreen();
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Digite algo na barra de pesquisa");
+        }
+        byid.setText("");
     }//GEN-LAST:event_FindActionPerformed
 
     private boolean isEmpty(){

@@ -2,7 +2,6 @@ package br.com.utfpr.forms;
 
 import br.com.utfpr.beans.Trailer;
 import br.com.utfpr.dao.impl.TrailerDao;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class TrailerView extends javax.swing.JFrame {
@@ -181,18 +180,9 @@ public class TrailerView extends javax.swing.JFrame {
 
     private void addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addActionPerformed
         if(!isEmpty()){
-            Trailer trailer = new Trailer();
-            trailer.setId(Long.parseLong(id.getText()));
-            trailer.setBrand(brand.getText());
-            trailer.setModel(model.getText());
-            trailer.setYear(Integer.parseInt(year.getText()));
-            trailer.setPlate(plate.getText());
-            trailer.setCapKG(Double.parseDouble(capKG.getText()));
-            trailer.setChassi(Long.parseLong(chassi.getText()));
-            trailer.setType(type.getSelectedItem().toString());
                    
             try {
-                new TrailerDao().add(trailer); 
+                new TrailerDao().add(newTrailer()); 
                 JOptionPane.showMessageDialog(rootPane,"Carreta inserida com sucesso");
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!\n" + e);
@@ -206,12 +196,8 @@ public class TrailerView extends javax.swing.JFrame {
 
     private void removeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeActionPerformed
         if(!isEmpty()){
-             TrailerDao rm = new TrailerDao();
-             Trailer trailer = new Trailer();
-             trailer.setId(Long.parseLong(id.getText()));
-            
             try{
-                rm.remove(trailer);
+                new TrailerDao().remove(newTrailer());
                 JOptionPane.showMessageDialog(rootPane,"Carreta excluida com sucesso");
             }catch(RuntimeException e){
 
@@ -225,19 +211,10 @@ public class TrailerView extends javax.swing.JFrame {
     }//GEN-LAST:event_removeActionPerformed
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
-       if(!isEmpty()){
-            Trailer trailer = new Trailer();
-            trailer.setId(Long.parseLong(id.getText()));
-            trailer.setBrand(brand.getText());
-            trailer.setModel(model.getText());
-            trailer.setYear(Integer.parseInt(year.getText()));
-            trailer.setPlate(plate.getText());
-            trailer.setCapKG(Double.parseDouble(capKG.getText()));
-            trailer.setChassi(Long.parseLong(chassi.getText()));
-            trailer.setType(type.getSelectedItem().toString());
+       if(!isEmpty()){          
                    
             try {
-                new TrailerDao().add(trailer); 
+                new TrailerDao().add(newTrailer()); 
                 JOptionPane.showMessageDialog(rootPane,"Carreta inserida com sucesso");
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!\n" + e);
@@ -253,19 +230,15 @@ public class TrailerView extends javax.swing.JFrame {
         if(!byId.getText().trim().equals("")){    
 
             try{
-               List<Trailer> trailers = (List<Trailer>) new TrailerDao().getList();
-               
-                for (Trailer trailer : trailers) {
-                    id.setText(Long.toString(trailer.getId()));
-                    brand.setText(trailer.getBrand());
-                    model.setText(trailer.getModel());
-                    year.setText(Integer.toString(trailer.getYear()));
-                    plate.setText(Long.toString(trailer.getId()));
-                    capKG.setText(Long.toString(trailer.getId()));
-                    chassi.setText(Long.toString(trailer.getId()));
-                    type.setSelectedItem(trailer.getType());                                   
-                }
-
+                Trailer trailer = (Trailer)new TrailerDao().read(Long.parseLong(byId.getText()));
+                id.setText(Long.toString(trailer.getId()));
+                brand.setText(trailer.getBrand());
+                model.setText(trailer.getModel());
+                year.setText(Integer.toString(trailer.getYear()));
+                plate.setText(trailer.getPlate());
+                capKG.setText(Double.toString(trailer.getCapKG()));
+                chassi.setText(Long.toString(trailer.getChassi()));
+                type.setSelectedItem(trailer.getType());
             }catch(RuntimeException e){
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Consultar dados no Banco!\n" + e);
                 clearScreen();
@@ -300,6 +273,18 @@ public class TrailerView extends javax.swing.JFrame {
         
     }
     
+    private Trailer newTrailer(){
+        Trailer trailer = new Trailer();
+            trailer.setId(Long.parseLong(id.getText()));
+            trailer.setBrand(brand.getText());
+            trailer.setModel(model.getText());
+            trailer.setYear(Integer.parseInt(year.getText()));
+            trailer.setPlate(plate.getText());
+            trailer.setCapKG(Double.parseDouble(capKG.getText()));
+            trailer.setChassi(Long.parseLong(chassi.getText()));
+            trailer.setType(type.getSelectedItem().toString());
+        return trailer;
+    }    
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
