@@ -533,7 +533,7 @@ public class DriverForm extends javax.swing.JFrame {
             Date date;
             try {
 
-                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText());
+                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.expiration.getText().trim());
                 expiration = Calendar.getInstance();
                 expiration.setTime(date);         
 

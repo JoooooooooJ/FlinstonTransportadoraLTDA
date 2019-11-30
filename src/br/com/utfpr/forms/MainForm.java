@@ -1,6 +1,10 @@
 package br.com.utfpr.forms;
 
+import br.com.utfpr.beans.Freight;
+import br.com.utfpr.dao.impl.FreightDao;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
 
 
 public class MainForm extends javax.swing.JFrame {
@@ -9,8 +13,31 @@ public class MainForm extends javax.swing.JFrame {
         initComponents();
         mainBackgroundPanel.setBackground(new Color(2,48,74,200));   
         setLocationRelativeTo(null);
+        initializeTable();
     }
 
+    String[] tableModel = new String[] {"Servico","Carga","Motorista","Caminhao","Carreta","Origem", "Destino","DatadeSaida"};   
+    private DefaultTableModel model = new DefaultTableModel(null,tableModel);
+    
+    private void initializeTable(){
+        jTable1.setModel(model);
+        
+        SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
+        
+        for (Freight freight : new FreightDao().getList()) {
+            model.addRow(new String[]{
+                freight.getService(),
+                freight.getCargo(),
+                freight.getDriver().getName(),
+                freight.getTruck().getModel(),
+                freight.getTrailer().getModel(),
+                freight.getOrigin(),
+                freight.getDestination(),
+                date.format(freight.getExitDate().getTime())
+            }
+            );
+        }
+    }
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -54,9 +81,9 @@ public class MainForm extends javax.swing.JFrame {
         ));
         tblServices.setViewportView(jTable1);
 
-        mainBackgroundPanel.add(tblServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 520, 320));
+        mainBackgroundPanel.add(tblServices, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 640, 320));
 
-        getContentPane().add(mainBackgroundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 530));
+        getContentPane().add(mainBackgroundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 530));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/utfpr/images/backGroundLogin_image.png"))); // NOI18N
         getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 800, 550));

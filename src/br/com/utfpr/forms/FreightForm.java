@@ -275,7 +275,7 @@ public class FreightForm extends javax.swing.JFrame {
         Date date;
         try {
 
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(this.exitDate.getText());
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(this.exitDate.getText().trim());
             exitDate = Calendar.getInstance();
             exitDate.setTime(date);         
 

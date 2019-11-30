@@ -1,6 +1,8 @@
 package br.com.utfpr.forms;
 
+import br.com.utfpr.dao.impl.LoginDao;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class LoginForm extends javax.swing.JFrame {
 
@@ -20,11 +22,11 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         passPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
         EMAILADDRESS = new javax.swing.JLabel();
         userPanel = new javax.swing.JPanel();
         loginIcon = new javax.swing.JLabel();
-        txtLogin = new javax.swing.JTextField();
+        user = new javax.swing.JTextField();
         btnSignin = new javax.swing.JButton();
         PASSWORD = new javax.swing.JLabel();
         sidePanel = new javax.swing.JPanel();
@@ -59,9 +61,9 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/utfpr/images/password_icon.png"))); // NOI18N
         passPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 30, 30));
 
-        jPasswordField1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jPasswordField1.setBorder(null);
-        passPanel.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 160, 10));
+        password.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        password.setBorder(null);
+        passPanel.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 160, 10));
 
         mainPanel.add(passPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 193, 28));
 
@@ -76,11 +78,16 @@ public class LoginForm extends javax.swing.JFrame {
         loginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/utfpr/images/icons8_contacts_filled_15px.png"))); // NOI18N
         userPanel.add(loginIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 4, 20, 20));
 
-        txtLogin.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        txtLogin.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtLogin.setToolTipText("");
-        txtLogin.setBorder(null);
-        userPanel.add(txtLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 160, 10));
+        user.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        user.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        user.setToolTipText("");
+        user.setBorder(null);
+        user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userActionPerformed(evt);
+            }
+        });
+        userPanel.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, 160, 10));
 
         mainPanel.add(userPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 193, 28));
 
@@ -125,13 +132,29 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSigninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSigninActionPerformed
-        new br.com.utfpr.forms.MainForm().show();
-        dispose();
+        boolean validUser = false;
+        try{
+             validUser = new LoginDao().isValid(user.getText().trim(), password.getText().trim());
+             if(validUser){
+            new br.com.utfpr.forms.MainForm().show();
+            dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(rootPane, "Usuario não existe");
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+        
     }//GEN-LAST:event_btnSigninActionPerformed
 
     private void btnExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseClicked
         dispose();
     }//GEN-LAST:event_btnExitMouseClicked
+
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -176,12 +199,12 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JLabel loginIcon;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel passPanel;
+    private javax.swing.JPasswordField password;
     private javax.swing.JPanel sidePanel;
-    private javax.swing.JTextField txtLogin;
+    private javax.swing.JTextField user;
     private javax.swing.JPanel userPanel;
     // End of variables declaration//GEN-END:variables
 }
