@@ -175,10 +175,10 @@ public class TruckForm extends javax.swing.JFrame {
             try{
                 new TruckDao().add(newTruck());
                 JOptionPane.showMessageDialog(rootPane, "Caminhão inerido com sucesso!");
+                clearScreen();
             }catch(RuntimeException e){
                 JOptionPane.showMessageDialog(rootPane, "Erro ao inserir no banco de dados!\n" +e);
             }
-            //clearScreen();
         }else
             JOptionPane.showMessageDialog(rootPane, "Por favor preencha os campos obrigatórios!");
     }//GEN-LAST:event_AddActionPerformed
@@ -194,11 +194,11 @@ public class TruckForm extends javax.swing.JFrame {
             try{
                 new TruckDao().remove(newTruck());
                 JOptionPane.showMessageDialog(rootPane,"Carreta excluida com sucesso");
+                clearScreen();
             }catch(RuntimeException e){
 
                 JOptionPane.showMessageDialog(rootPane,"Erro o excluir dados do banco\n" + e);
             }
-            //clearScreen();
          }else{
              JOptionPane.showMessageDialog(rootPane,"Para excluir dados é preciso primeiro carregá-los\n"
                                                     + "Utilize a barra de pesquisa a sua direita" );
@@ -210,6 +210,7 @@ public class TruckForm extends javax.swing.JFrame {
             try{
                 new TruckDao().update(newTruck());
                 JOptionPane.showMessageDialog(rootPane, "Caminhão inerido com sucesso!");
+                clearScreen();
             }catch(RuntimeException e){
                 JOptionPane.showMessageDialog(rootPane, "Erro ao inserir no banco de dados!\n" +e);
             }
@@ -232,7 +233,7 @@ public class TruckForm extends javax.swing.JFrame {
                 kml.setText(Integer.toString(truck.getKML()));                
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Consultar dados no Banco!\n" + e);
-                //clearScreen();
+                clearScreen();
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Digite algo na barra de pesquisa");
@@ -250,6 +251,17 @@ public class TruckForm extends javax.swing.JFrame {
                 chassi.getText().trim().equals("")&&
                 kml.getText().trim().equals("");
     } 
+    
+    private void clearScreen(){
+        id.setText("");
+        brand.setText("");
+        model.setText("");
+        year.setText("");
+        plate.setText("");
+        capTank.setText("");
+        chassi.setText("");
+        kml.setText("");
+    }
     
     private Truck newTruck(){
         Truck truck = new Truck();

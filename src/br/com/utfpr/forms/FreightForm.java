@@ -1,9 +1,18 @@
 package br.com.utfpr.forms;
 
 import br.com.utfpr.beans.Driver;
+import br.com.utfpr.beans.Freight;
+import br.com.utfpr.beans.Trailer;
+import br.com.utfpr.beans.Truck;
 import br.com.utfpr.dao.impl.DriverDao;
-import br.com.utfpr.forms.MainForm;
-import java.util.List;
+import br.com.utfpr.dao.impl.FreightDao;
+import br.com.utfpr.dao.impl.TrailerDao;
+import br.com.utfpr.dao.impl.TruckDao;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class FreightForm extends javax.swing.JFrame {
 
@@ -29,15 +38,17 @@ public class FreightForm extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         service = new javax.swing.JComboBox<>();
-        truck = new javax.swing.JComboBox<>();
+        trucks = new javax.swing.JComboBox<>();
         origin = new javax.swing.JComboBox<>();
         destination = new javax.swing.JComboBox<>();
         product = new javax.swing.JComboBox<>();
         drivers = new javax.swing.JComboBox<>();
         exitDate = new javax.swing.JTextField();
-        trailer = new javax.swing.JComboBox<>();
+        trailers = new javax.swing.JComboBox<>();
         confirm = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
+        price = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,8 +89,7 @@ public class FreightForm extends javax.swing.JFrame {
         service.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         service.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        truck.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        truck.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        trucks.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         origin.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         origin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -94,11 +104,15 @@ public class FreightForm extends javax.swing.JFrame {
 
         exitDate.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
 
-        trailer.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        trailer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        trailers.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         confirm.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         confirm.setText("CONFIRMAR");
+        confirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmActionPerformed(evt);
+            }
+        });
 
         cancel.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cancel.setText("CANCELAR");
@@ -107,6 +121,10 @@ public class FreightForm extends javax.swing.JFrame {
                 cancelActionPerformed(evt);
             }
         });
+
+        price.setEditable(false);
+
+        jLabel2.setText("Valor:");
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -138,8 +156,12 @@ public class FreightForm extends javax.swing.JFrame {
                         .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cancel)
                             .addComponent(exitDate, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                .addComponent(confirm, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(confirm, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                    .addComponent(price))
                 .addGap(66, 66, 66))
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
@@ -151,7 +173,7 @@ public class FreightForm extends javax.swing.JFrame {
                     .addGroup(MainPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(truck, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(trucks, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(MainPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
@@ -159,7 +181,7 @@ public class FreightForm extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(trailer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(trailers, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         MainPanelLayout.setVerticalGroup(
@@ -174,9 +196,9 @@ public class FreightForm extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(truck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(trucks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(trailer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trailers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14)
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -193,10 +215,12 @@ public class FreightForm extends javax.swing.JFrame {
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(drivers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
+                .addGap(16, 16, 16)
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(exitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(exitDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cancel, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
@@ -209,7 +233,7 @@ public class FreightForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(HeaderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(HeaderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,10 +251,52 @@ public class FreightForm extends javax.swing.JFrame {
         new MainForm().show();
     }//GEN-LAST:event_cancelActionPerformed
 
-    public void startAllCheckbox(){
-        List<Driver> list = (List<Driver>)new DriverDao().getList();
-        for (Driver driver : list) {
-            drivers.addItem(driver.toString());
+    private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
+        try{
+            new FreightDao().add(newFreight());
+            JOptionPane.showMessageDialog(rootPane,"Frete Confirmado!");
+        }catch(RuntimeException e){
+            JOptionPane.showMessageDialog(rootPane,"Erro ao salvar dados no Banco!\n" + e);
+        }
+    }//GEN-LAST:event_confirmActionPerformed
+  
+    private Freight newFreight(){        
+        Freight freight = new Freight();
+        freight.setService(service.getSelectedItem().toString());
+        freight.setTruck((Truck)new TruckDao().read(trucks.getSelectedIndex()));
+        freight.setTrailer((Trailer) new TrailerDao().read(trailers.getSelectedIndex()));
+        freight.setOrigin(origin.getSelectedItem().toString());
+        freight.setDestination(destination.getSelectedItem().toString());
+        freight.setCargo(product.getSelectedItem().toString());
+        freight.setDriver((Driver) new DriverDao().read(drivers.getSelectedIndex()));
+        Calendar exitDate = null ;
+        Date date;
+        try {
+
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(this.exitDate.getText());
+            exitDate = Calendar.getInstance();
+            exitDate.setTime(date);         
+
+        }catch(ParseException e){
+            JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
+        } 
+        freight.setExitDate(exitDate);
+        freight.setPrice(Double.parseDouble(price.getText()));
+        
+        return freight;
+    } 
+    
+    private void startAllCheckbox(){
+        for (Driver driver : new DriverDao().getList()) {
+            if(driver.isStatus()){
+                drivers.addItem(driver.toString());
+            }
+        }
+        for (Truck truck : new TruckDao().getList()) {
+            trucks.addItem(truck.toString());
+        }
+        for (Trailer trailer : new TrailerDao().getList()) {
+            trailers.addItem(trailer.toString());
         }
     }
     
@@ -307,6 +373,7 @@ public class FreightForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> drivers;
     private javax.swing.JTextField exitDate;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -315,9 +382,10 @@ public class FreightForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JComboBox<String> origin;
+    private javax.swing.JTextField price;
     private javax.swing.JComboBox<String> product;
     private javax.swing.JComboBox<String> service;
-    private javax.swing.JComboBox<String> trailer;
-    private javax.swing.JComboBox<String> truck;
+    private javax.swing.JComboBox<String> trailers;
+    private javax.swing.JComboBox<String> trucks;
     // End of variables declaration//GEN-END:variables
 }

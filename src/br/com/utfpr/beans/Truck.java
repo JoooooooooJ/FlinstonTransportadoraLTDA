@@ -83,6 +83,13 @@ public class Truck {
     public void setDriver(Driver driver) {
         this.driver = driver;
     }
+
+    @Override
+    public String toString() {
+        return id + "-" + brand + "-" + model;
+    }
+    
+    
     
     
 }
