@@ -123,6 +123,7 @@ public class FreightForm extends javax.swing.JFrame {
         });
 
         price.setEditable(false);
+        price.setText("0.00");
 
         jLabel2.setText("Valor:");
 
@@ -251,6 +252,7 @@ public class FreightForm extends javax.swing.JFrame {
         new MainForm().show();
     }//GEN-LAST:event_cancelActionPerformed
 
+    
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
         try{
             new FreightDao().add(newFreight());
@@ -263,12 +265,12 @@ public class FreightForm extends javax.swing.JFrame {
     private Freight newFreight(){        
         Freight freight = new Freight();
         freight.setService(service.getSelectedItem().toString());
-        freight.setTruck((Truck)new TruckDao().read(trucks.getSelectedIndex()));
-        freight.setTrailer((Trailer) new TrailerDao().read(trailers.getSelectedIndex()));
+        freight.setTruck((Truck)new TruckDao().read(trucks.getSelectedIndex()+1));
+        freight.setTrailer((Trailer) new TrailerDao().read(trailers.getSelectedIndex()+1));
         freight.setOrigin(origin.getSelectedItem().toString());
         freight.setDestination(destination.getSelectedItem().toString());
         freight.setCargo(product.getSelectedItem().toString());
-        freight.setDriver((Driver) new DriverDao().read(drivers.getSelectedIndex()));
+        freight.setDriver((Driver) new DriverDao().read(drivers.getSelectedIndex()+1));
         Calendar exitDate = null ;
         Date date;
         try {
