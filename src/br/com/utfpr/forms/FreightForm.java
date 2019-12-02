@@ -327,7 +327,7 @@ public class FreightForm extends javax.swing.JFrame {
     private void startAllCheckbox(){
         new DriverDao().getList()
                 .stream()
-                .filter((driver) -> (driver.isStatus()))
+                .filter(Driver::isStatus)
                 .forEachOrdered((driver) -> {
             drivers.addItem(driver.toString());
         });
