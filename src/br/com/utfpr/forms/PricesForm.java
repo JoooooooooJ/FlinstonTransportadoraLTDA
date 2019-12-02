@@ -56,11 +56,16 @@ public class PricesForm extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 124, -1, -1));
 
         origin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        origin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        origin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Assis/SP", "Ibiporã/PR", "Londrina/PR", "Cornélio Procópio/PR", "Rancharia/SP", "Maringá/PR" }));
+        origin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                originActionPerformed(evt);
+            }
+        });
         jPanel1.add(origin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 32, 320, -1));
 
         destination.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        destination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        destination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Campo Grande/MS", "São Paulo/SP", "Curitiba/PR", "Porto Alegre/RS" }));
         jPanel1.add(destination, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 78, 320, -1));
 
         price.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -76,6 +81,10 @@ public class PricesForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void originActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_originActionPerformed
 
     /**
      * @param args the command line arguments
