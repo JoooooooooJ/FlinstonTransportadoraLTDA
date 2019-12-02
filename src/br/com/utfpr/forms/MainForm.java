@@ -15,7 +15,7 @@ public class MainForm extends javax.swing.JFrame {
         initializeTable();
     }
 
-    String[] tableModel = new String[] {"Servico","Carga","Motorista","Caminhao","Carreta","Origem", "Destino","DatadeSaida"};   
+    String[] tableModel = new String[] {"Servico","Carga","Motorista","Caminhao","Carreta","Origem", "Destino","DatadeSaida","Valor"};   
     private DefaultTableModel model = new DefaultTableModel(null,tableModel);
     
     private void initializeTable(){
@@ -32,7 +32,8 @@ public class MainForm extends javax.swing.JFrame {
                 freight.getTrailer().getModel(),
                 freight.getOrigin().toString(),
                 freight.getDestination().toString(),
-                date.format(freight.getExitDate().getTime())
+                date.format(freight.getExitDate().getTime()),
+                Double.toString(freight.getPrice())
             }
             );
         });
