@@ -13,6 +13,35 @@ import br.com.utfpr.dao.Dao;
 
 public class AddressDao implements Dao<Address>{
 
+    public AddressDao() {
+        try{         
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "CREATE TABLE IF NOT EXISTS public.endereco\n" +
+                        "(\n" +
+                        "    cod bigint NOT NULL,\n" +
+                        "    rua character varying(50) COLLATE pg_catalog.\"default\",\n" +
+                        "    numero integer,\n" +
+                        "    cidade character varying(30) COLLATE pg_catalog.\"default\",\n" +
+                        "    cep character varying(10) COLLATE pg_catalog.\"default\",\n" +
+                        "    uf character varying(2) COLLATE pg_catalog.\"default\",\n" +
+                        "    CONSTRAINT endereco_pkey PRIMARY KEY (cod)\n" +
+                        ")\n" +
+                        "WITH (\n" +
+                        "    OIDS = FALSE\n" +
+                        ")\n" +
+                        "TABLESPACE pg_default;";
+            PreparedStatement stmt = con.prepareStatement(sql);            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }
+    }      
+
     @Override
     public void add(Object obj) {
         

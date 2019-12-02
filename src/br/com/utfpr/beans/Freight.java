@@ -8,9 +8,9 @@ public class Freight {
     private String service;
     private Truck truck;
     private Trailer trailer;
-    private String origin;
-    private String destination;
-    private String Cargo;
+    private Origin origin;
+    private Destination destination;
+    private Product Cargo;
     private Driver driver;
     private Calendar exitDate;
     private Double price;
@@ -47,29 +47,31 @@ public class Freight {
         this.trailer = trailer;
     }
 
-    public String getOrigin() {
+    public Origin getOrigin() {
         return origin;
     }
 
-    public void setOrigin(String origin) {
+    public void setOrigin(Origin origin) {
         this.origin = origin;
     }
 
-    public String getDestination() {
+    public Destination getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
+    public void setDestination(Destination destination) {
         this.destination = destination;
     }
 
-    public String getCargo() {
+    public Product getCargo() {
         return Cargo;
     }
 
-    public void setCargo(String Cargo) {
+    public void setCargo(Product Cargo) {
         this.Cargo = Cargo;
     }
+    
+    
 
     public Driver getDriver() {
         return driver;

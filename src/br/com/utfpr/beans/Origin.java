@@ -11,26 +11,52 @@ import java.util.List;
 
 
 public class Origin {
-    private String nomeOrigem;
-    private double precoOrigem;
+
+    public Origin() {
+        try{         
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "CREATE TABLE IF NOT EXISTS public.origem\n" +
+                        "(\n" +
+                        "    nome character varying(25) COLLATE pg_catalog.\"default\",\n" +
+                        "    precoorg numeric(6,2),\n" +
+                        "	CONSTRAINT origem_pkey PRIMARY KEY (nome)\n" +
+                        ")\n" +
+                        "WITH (\n" +
+                        "    OIDS = FALSE\n" +
+                        ")\n" +
+                        "TABLESPACE pg_default;";
+            PreparedStatement stmt = con.prepareStatement(sql);            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }        
+    }
+    
+    private String name;
+    private double price;
 
     public String getName() {
-        return nomeOrigem;
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice() {
-        return precoOrigem;
+        return price;
     }
 
-    public void setName(String nomeOrigem) {
-        this.nomeOrigem = nomeOrigem;
-    }
-
-    public void setPrice(double preçoOrigem) {
-        this.precoOrigem = preçoOrigem;
-    }
+    public void setPrice(double price) {
+        this.price = price;
+    }    
     
-    public List<Origin> getListOrigin(){
+    public List<Origin> getList(){
         try(Connection con = new ConnectionBuilder().getConnection()){
             List<Origin> originList = new ArrayList<>();
             String sql = "select * from origem";
@@ -51,6 +77,32 @@ public class Origin {
             throw new RuntimeException(e);
         }
     }
+    public Origin read(String name){
+        try(Connection con = new ConnectionBuilder().getConnection()){
+            Origin origin = new Origin();
+            String sql = "select * from origem where nome =?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, name);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){                
+                origin.setName(rs.getString("nome"));
+                origin.setPrice(rs.getDouble("precoOrg"));                
+            }
+            stmt.close();
+            con.close();
+
+            return origin;
+
+        }catch(SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return  name;
+    }
+    
     
     
 }

@@ -13,6 +13,36 @@ import java.util.List;
 
 public class TruckDao implements Dao<Truck>{
 
+    public TruckDao() {
+        
+        try(Connection con = new ConnectionBuilder().getConnection()){            
+            String sql = "CREATE TABLE IF NOT EXISTS public.caminhao\n" +
+                        "(\n" +
+                        "    codcaminhao bigint NOT NULL,\n" +
+                        "    marca character varying(40) COLLATE pg_catalog.\"default\",\n" +
+                        "    modelo character varying(40) COLLATE pg_catalog.\"default\",\n" +
+                        "    ano integer,\n" +
+                        "    placa character varying(8) COLLATE pg_catalog.\"default\",\n" +
+                        "    chassi character varying(17) COLLATE pg_catalog.\"default\",\n" +
+                        "    captanque numeric(6,2),\n" +
+                        "    kml integer,\n" +
+                        "    CONSTRAINT caminhao_pkey PRIMARY KEY (codcaminhao)\n" +
+                        ")\n" +
+                        "WITH (\n" +
+                        "    OIDS = FALSE\n" +
+                        ")\n" +
+                        "TABLESPACE pg_default;";
+            PreparedStatement stmt = con.prepareStatement(sql);            
+            stmt.execute();
+            stmt.close();            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }        
+    }
+
     @Override
     public void add(Object obj) {
         try{

@@ -13,6 +13,36 @@ import java.util.List;
 import br.com.utfpr.dao.Dao;
 
 public class TrailerDao implements Dao<Trailer>{
+    
+    public TrailerDao(){
+         try{         
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "CREATE TABLE IF NOT EXISTS public.carreta\n" +
+                        "(\n" +
+                        "    cod bigint,\n" +
+                        "    marca character varying(50) COLLATE pg_catalog.\"default\",\n" +
+                        "    modelo character varying(50) COLLATE pg_catalog.\"default\",\n" +
+                        "    ano integer,\n" +
+                        "    placa character varying(8) COLLATE pg_catalog.\"default\",\n" +
+                        "    capcarga bigint,\n" +
+                        "    chassi bigint,\n" +
+                        "    tipo character varying(20) COLLATE pg_catalog.\"default\"\n" +
+                        ")\n" +
+                        "WITH (\n" +
+                        "    OIDS = FALSE\n" +
+                        ")\n" +
+                        "TABLESPACE pg_default;";
+            PreparedStatement stmt = con.prepareStatement(sql);            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void add(Object obj) {

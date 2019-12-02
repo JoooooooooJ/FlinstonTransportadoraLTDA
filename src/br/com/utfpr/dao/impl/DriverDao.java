@@ -16,6 +16,39 @@ import br.com.utfpr.dao.Dao;
 
 public class DriverDao implements Dao<Driver> {
 
+    public DriverDao() {
+        try{         
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "CREATE TABLE IF NOT EXISTS public.motorista\n" +
+                        "(\n" +
+                        "    cod bigint NOT NULL,\n" +
+                        "    nome character varying(45) COLLATE pg_catalog.\"default\",\n" +
+                        "    fone character varying(15) COLLATE pg_catalog.\"default\",\n" +
+                        "    rg bigint,\n" +
+                        "    cpf bigint,\n" +
+                        "    email character varying(50) COLLATE pg_catalog.\"default\",\n" +
+                        "    cnh bigint,\n" +
+                        "    tipocnh character varying(2) COLLATE pg_catalog.\"default\",\n" +
+                        "    datavencimento date,\n" +
+                        "    status boolean,\n" +
+                        "    CONSTRAINT motorista_pkey PRIMARY KEY (cod)\n" +
+                        ")\n" +
+                        "WITH (\n" +
+                        "    OIDS = FALSE\n" +
+                        ")\n" +
+                        "TABLESPACE pg_default;";
+            PreparedStatement stmt = con.prepareStatement(sql);            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }
+    }   
+    
     @Override
     public void add(Object obj) {
         

@@ -1,6 +1,5 @@
 package br.com.utfpr.forms;
 
-import br.com.utfpr.beans.Freight;
 import br.com.utfpr.dao.impl.FreightDao;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -24,19 +23,19 @@ public class MainForm extends javax.swing.JFrame {
         
         SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
         
-        for (Freight freight : new FreightDao().getList()) {
+        new FreightDao().getList().forEach((freight) -> {
             model.addRow(new String[]{
                 freight.getService(),
-                freight.getCargo(),
+                freight.getCargo().toString(),
                 freight.getDriver().getName(),
                 freight.getTruck().getModel(),
                 freight.getTrailer().getModel(),
-                freight.getOrigin(),
-                freight.getDestination(),
+                freight.getOrigin().toString(),
+                freight.getDestination().toString(),
                 date.format(freight.getExitDate().getTime())
             }
             );
-        }
+        });
     }
    
     @SuppressWarnings("unchecked")
@@ -86,7 +85,7 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().add(mainBackgroundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 920, 530));
 
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/utfpr/images/backGroundLogin_image.png"))); // NOI18N
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 800, 550));
+        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 910, 550));
 
         btnRegistry.setText("Cadastros");
 

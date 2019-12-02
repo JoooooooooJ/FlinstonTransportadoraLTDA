@@ -1,8 +1,11 @@
 package br.com.utfpr.dao.impl;
 
+import br.com.utfpr.beans.Destination;
 import br.com.utfpr.beans.Driver;
 import br.com.utfpr.dao.Dao;
 import br.com.utfpr.beans.Freight;
+import br.com.utfpr.beans.Origin;
+import br.com.utfpr.beans.Product;
 import br.com.utfpr.beans.Trailer;
 import br.com.utfpr.beans.Truck;
 import br.com.utfpr.dao.ConnectionBuilder;
@@ -18,6 +21,39 @@ import java.util.Collection;
 import java.util.List;
 public class FreightDao implements Dao<Freight> {
 
+    public FreightDao() {
+        try{         
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "CREATE TABLE IF NOT EXISTS public.frete\n" +
+                        "(\n" +
+                        "    cod serial,\n" +
+                        "    servico character varying(50) COLLATE pg_catalog.\"default\",\n" +
+                        "    caminhao bigint,\n" +
+                        "    carreta bigint,\n" +
+                        "    origem character varying(25) COLLATE pg_catalog.\"default\",\n" +
+                        "    destino character varying(25) COLLATE pg_catalog.\"default\",\n" +
+                        "    carga character varying(25) COLLATE pg_catalog.\"default\",\n" +
+                        "    motorista bigint,\n" +
+                        "    datadesaida date,\n" +
+                        "    preco numeric(6,2),\n" +
+                        "    CONSTRAINT frete_pkey PRIMARY KEY (cod)\n" +
+                        ")\n" +
+                        "WITH (\n" +
+                        "    OIDS = FALSE\n" +
+                        ")\n" +
+                        "TABLESPACE pg_default;";
+            PreparedStatement stmt = con.prepareStatement(sql);            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }
+    }    
+    
     @Override
     public void add(Object obj) {
         Freight freight = (Freight) obj;
@@ -29,9 +65,9 @@ public class FreightDao implements Dao<Freight> {
             stmt.setString(1,freight.getService());
             stmt.setLong(2,freight.getTruck().getId());
             stmt.setLong(3, freight.getTrailer().getId());
-            stmt.setString(4,freight.getOrigin());
-            stmt.setString(5,freight.getDestination());
-            stmt.setString(6, freight.getCargo());
+            stmt.setString(4,freight.getOrigin().toString());
+            stmt.setString(5,freight.getDestination().toString());
+            stmt.setString(6, freight.getCargo().toString());
             stmt.setLong(7, freight.getDriver().getId());
             stmt.setDate(8, new Date(freight.getExitDate().getTimeInMillis()));
             stmt.setDouble(9, freight.getPrice());
@@ -62,9 +98,9 @@ public class FreightDao implements Dao<Freight> {
             stmt.setString(1,freight.getService());
             stmt.setLong(2,freight.getTruck().getId());
             stmt.setLong(3, freight.getTrailer().getId());
-            stmt.setString(4,freight.getOrigin());
-            stmt.setString(5,freight.getDestination());
-            stmt.setString(6, freight.getCargo());
+            stmt.setString(4,freight.getOrigin().toString());
+            stmt.setString(5,freight.getDestination().toString());
+            stmt.setString(6, freight.getCargo().toString());
             stmt.setLong(7, freight.getDriver().getId());
             stmt.setDate(8, new Date(freight.getExitDate().getTimeInMillis()));
             stmt.setDouble(9, freight.getPrice());
@@ -94,9 +130,9 @@ public class FreightDao implements Dao<Freight> {
                 freight.setService(rs.getString("servico"));
                 freight.setTruck((Truck)new TruckDao().read(rs.getLong("caminhao")));
                 freight.setTrailer((Trailer) new TrailerDao().read(rs.getLong("carreta")));
-                freight.setOrigin(rs.getString("origem"));
-                freight.setDestination(rs.getString("destino"));
-                freight.setCargo(rs.getString("carga"));
+                freight.setOrigin(new Origin().read(rs.getString("origem")));
+                freight.setDestination(new Destination().read(rs.getString("destino")));
+                freight.setCargo(new Product().read(rs.getString("carga")));
                 freight.setDriver((Driver) new DriverDao().read(rs.getLong("motorista")));
                 Calendar exitDate = Calendar.getInstance();
                 exitDate.setTime(rs.getDate("dataDeSaida"));
@@ -112,9 +148,10 @@ public class FreightDao implements Dao<Freight> {
 
     @Override
     public Collection<Freight> getList() {
+        List<Freight> freightList = new ArrayList<>();
          try {
             
-            List<Freight> freightList = new ArrayList<>();
+            
             Connection con = new ConnectionBuilder().getConnection();
             String sql = "select * from frete";
             PreparedStatement stmt = con.prepareStatement(sql);
@@ -125,9 +162,9 @@ public class FreightDao implements Dao<Freight> {
                 freight.setService(rs.getString("servico"));
                 freight.setTruck((Truck)new TruckDao().read(rs.getLong("caminhao")));
                 freight.setTrailer((Trailer) new TrailerDao().read(rs.getLong("carreta")));
-                freight.setOrigin(rs.getString("origem"));
-                freight.setDestination(rs.getString("destino"));
-                freight.setCargo(rs.getString("carga"));
+                freight.setOrigin(new Origin().read(rs.getString("origem")));
+                freight.setDestination(new Destination().read(rs.getString("destino")));
+                freight.setCargo(new Product().read(rs.getString("carga")));
                 freight.setDriver((Driver) new DriverDao().read(rs.getLong("motorista")));
                 Calendar exitDate = Calendar.getInstance();
                 exitDate.setTime(rs.getDate("dataDeSaida"));
@@ -138,8 +175,9 @@ public class FreightDao implements Dao<Freight> {
             return freightList;
             
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
+         return freightList;
     }
     
 }
