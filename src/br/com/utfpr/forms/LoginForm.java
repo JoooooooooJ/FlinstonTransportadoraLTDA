@@ -1,7 +1,10 @@
 package br.com.utfpr.forms;
 
+import FlinstonTrans.src.Classes.Login;
 import br.com.utfpr.dao.impl.LoginDao;
+import br.com.utfpr.util.InitializeCatalog;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class LoginForm extends javax.swing.JFrame {
@@ -10,6 +13,9 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         sidePanel.setBackground(new Color(2,48,74,200));   
         setLocationRelativeTo(null);
+        List<Login> login =  new LoginDao().getList();
+        if(login.isEmpty())
+            new InitializeCatalog().createAdmin();
     }
 
     @SuppressWarnings("unchecked")

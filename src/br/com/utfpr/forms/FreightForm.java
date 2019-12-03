@@ -11,6 +11,7 @@ import br.com.utfpr.dao.impl.DriverDao;
 import br.com.utfpr.dao.impl.FreightDao;
 import br.com.utfpr.dao.impl.TrailerDao;
 import br.com.utfpr.dao.impl.TruckDao;
+import br.com.utfpr.util.InitializeCatalog;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -345,15 +346,22 @@ public class FreightForm extends javax.swing.JFrame {
         new TrailerDao().getList().forEach((trailer) -> {
             trailers.addItem(trailer.toString());
         });
+        if(new Destination().getList().isEmpty())
+            new InitializeCatalog().InitializeCatalog();
         new Destination().getList().forEach((destination) -> {
             destinations.addItem(destination.toString());
         });
+        if(new Origin().getList().isEmpty())
+            new InitializeCatalog().InitializeCatalog();
         new Origin().getList().forEach((origin) -> {
             origins.addItem(origin.toString());
-        });
+        });        
+        if(new Product().getList().isEmpty())
+            new InitializeCatalog().InitializeCatalog();
         new Product().getList().forEach((product) -> {
             products.addItem(product.toString());
         });
+      
     }
     
     public static void main(String args[]) {

@@ -1,10 +1,13 @@
 package br.com.utfpr.dao.impl;
 
+import FlinstonTrans.src.Classes.Login;
 import br.com.utfpr.dao.ConnectionBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginDao {
 
@@ -53,6 +56,24 @@ public class LoginDao {
             throw new RuntimeException(e);
         }
         return false;
+    }
+     public List<Login> getList(){
+        try {
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "select * from login";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();    
+            List<Login> listLogin = new ArrayList<>();
+            while(rs.next()){
+                Login login = new Login();
+                login.setUser(rs.getString("usuario"));
+                login.setPassword(rs.getString("senha"));
+                listLogin.add(login);                
+            }
+            return listLogin;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     
 }
