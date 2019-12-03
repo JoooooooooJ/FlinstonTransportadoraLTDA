@@ -11,6 +11,8 @@ public class PricesForm extends javax.swing.JFrame {
 
     public PricesForm() {
         initComponents();
+        if(new Destination().getList().isEmpty()||new Origin().getList().isEmpty())
+            new InitializeCatalog().InitializeCatalog();
         new Destination().getList().forEach((destination) -> {
             destinations.addItem(destination.toString());
         });
