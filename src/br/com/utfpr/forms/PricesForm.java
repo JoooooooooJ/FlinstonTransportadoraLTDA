@@ -1,10 +1,36 @@
 package br.com.utfpr.forms;
 
+import br.com.utfpr.beans.Destination;
+import br.com.utfpr.beans.Origin;
+
 public class PricesForm extends javax.swing.JFrame {
+
+    double toPrice = 0.0;
+    double fromPrice = 0.0;
+    double total = 0.0;
 
     public PricesForm() {
         initComponents();
+        new Destination().getList().forEach((destination) -> {
+            destinations.addItem(destination.toString());
+        });
+        new Origin().getList().forEach((origin) -> {
+            origins.addItem(origin.toString());
+        });
     }
+    
+    private void sum() {
+        total = fromPrice + toPrice;
+        price.setText(Double.toString(total));
+    }
+    
+     private void originsItemStateChanged(java.awt.event.ItemEvent evt) {                                         
+        fromPrice = new Origin().read(origins.getSelectedItem().toString()).getPrice();
+    }                                        
+
+    private void destinationsItemStateChanged(java.awt.event.ItemEvent evt) {                                              
+       toPrice = new Destination().read(destinations.getSelectedItem().toString()).getPrice();
+    }                                             
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -17,8 +43,8 @@ public class PricesForm extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        origin = new javax.swing.JComboBox<>();
-        destination = new javax.swing.JComboBox<>();
+        origins = new javax.swing.JComboBox<>();
+        destinations = new javax.swing.JComboBox<>();
         price = new javax.swing.JTextField();
         consult = new javax.swing.JButton();
         back = new javax.swing.JButton();
@@ -55,23 +81,21 @@ public class PricesForm extends javax.swing.JFrame {
         jLabel4.setToolTipText("Não considerando o peso da carga");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 124, -1, -1));
 
-        origin.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        origin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Assis/SP", "Ibiporã/PR", "Londrina/PR", "Cornélio Procópio/PR", "Rancharia/SP", "Maringá/PR" }));
-        origin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                originActionPerformed(evt);
-            }
-        });
-        jPanel1.add(origin, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 32, 320, -1));
+        origins.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jPanel1.add(origins, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 32, 320, -1));
 
-        destination.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        destination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Campo Grande/MS", "São Paulo/SP", "Curitiba/PR", "Porto Alegre/RS" }));
-        jPanel1.add(destination, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 78, 320, -1));
+        destinations.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jPanel1.add(destinations, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 78, 320, -1));
 
         price.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jPanel1.add(price, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 121, 320, -1));
 
         consult.setText("Consultar");
+        consult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultActionPerformed(evt);
+            }
+        });
         jPanel1.add(consult, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
         back.setText("Voltar");
@@ -82,9 +106,9 @@ public class PricesForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void originActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_originActionPerformed
+    private void consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultActionPerformed
+        sum();
+    }//GEN-LAST:event_consultActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,13 +151,14 @@ public class PricesForm extends javax.swing.JFrame {
     private javax.swing.JLabel Title;
     private javax.swing.JButton back;
     private javax.swing.JButton consult;
-    private javax.swing.JComboBox<String> destination;
+    private javax.swing.JComboBox<String> destinations;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox<String> origin;
+    private javax.swing.JComboBox<String> origins;
     private javax.swing.JTextField price;
     // End of variables declaration//GEN-END:variables
+
 }

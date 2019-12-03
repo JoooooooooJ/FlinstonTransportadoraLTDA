@@ -53,6 +53,7 @@ public class MainForm extends javax.swing.JFrame {
         btnTruck = new javax.swing.JMenuItem();
         btnTruckload = new javax.swing.JMenuItem();
         btnDriver = new javax.swing.JMenuItem();
+        consultarPrecos = new javax.swing.JMenuItem();
         btnMainSystem = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -114,6 +115,14 @@ public class MainForm extends javax.swing.JFrame {
         });
         btnRegistry.add(btnDriver);
 
+        consultarPrecos.setLabel("Consultar precos");
+        consultarPrecos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultarPrecosActionPerformed(evt);
+            }
+        });
+        btnRegistry.add(consultarPrecos);
+
         jMenuBar1.add(btnRegistry);
 
         btnMainSystem.setText("Transportadora");
@@ -151,6 +160,11 @@ public class MainForm extends javax.swing.JFrame {
         new br.com.utfpr.forms.FreightForm().show();
         dispose();        
     }//GEN-LAST:event_btnMainSystemMouseClicked
+
+    private void consultarPrecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarPrecosActionPerformed
+       new br.com.utfpr.forms.PricesForm().show();
+        dispose();
+    }//GEN-LAST:event_consultarPrecosActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -192,6 +206,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu btnRegistry;
     private javax.swing.JMenuItem btnTruck;
     private javax.swing.JMenuItem btnTruckload;
+    private javax.swing.JMenuItem consultarPrecos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTable jTable1;
     private javax.swing.JPanel mainBackgroundPanel;

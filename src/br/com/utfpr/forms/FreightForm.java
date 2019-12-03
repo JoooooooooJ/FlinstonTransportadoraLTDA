@@ -22,7 +22,8 @@ public class FreightForm extends javax.swing.JFrame {
     public FreightForm() {
         initComponents();
         setLocationRelativeTo(null);
-        startAllCheckbox();      
+        startAllCheckbox();
+        sum();
     }
 
     @SuppressWarnings("unchecked")
@@ -262,37 +263,44 @@ public class FreightForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    Double total = 0.00;
+    
+    Double total = 0.00, fromPrice = 0.0, toPrice = 0.0, cargoPrice = 0.0;
     
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
         dispose();
-        new MainForm().show();
+        new MainForm().show();        
     }//GEN-LAST:event_cancelActionPerformed
 
+    
+    private void sum(){
+            total = fromPrice + toPrice + cargoPrice;
+            price.setText(Double.toString(total));       
+    }
     
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
         try{
             new FreightDao().add(newFreight());
             JOptionPane.showMessageDialog(rootPane,"Frete Confirmado!");
+            total = 0.00;
         }catch(RuntimeException e){
             JOptionPane.showMessageDialog(rootPane,"Erro ao salvar dados no Banco!\n" + e);
         }
     }//GEN-LAST:event_confirmActionPerformed
 
     private void originsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_originsItemStateChanged
-        total += new Origin().read(origins.getSelectedItem().toString()).getPrice();
-        price.setText(Double.toString(total));
+        fromPrice = new Origin().read(origins.getSelectedItem().toString()).getPrice();
+        sum();
     }//GEN-LAST:event_originsItemStateChanged
 
     private void destinationsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_destinationsItemStateChanged
-       total += new Destination().read(destinations.getSelectedItem().toString()).getPrice();
-       price.setText(Double.toString(total));
+       toPrice = new Destination().read(destinations.getSelectedItem().toString()).getPrice();
+       sum();
     }//GEN-LAST:event_destinationsItemStateChanged
 
     private void productsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_productsItemStateChanged
         Trailer trailer = (Trailer) new TrailerDao().read(trailers.getSelectedIndex()+1);
-        total += new Product().read(products.getSelectedItem().toString()).getPrice() * (trailer.getCapKG()/1000);
-        price.setText(Double.toString(total));
+        cargoPrice = new Product().read(products.getSelectedItem().toString()).getPrice() * (trailer.getCapKG()/1000);        
+        sum();
     }//GEN-LAST:event_productsItemStateChanged
   
     private Freight newFreight(){        
