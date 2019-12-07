@@ -25,15 +25,6 @@ public class PricesForm extends javax.swing.JFrame {
         total = fromPrice + toPrice;
         price.setText(Double.toString(total));
     }
-    
-     private void originsItemStateChanged(java.awt.event.ItemEvent evt) {                                         
-        fromPrice = new Origin().read(origins.getSelectedItem().toString()).getPrice();
-    }                                        
-
-    private void destinationsItemStateChanged(java.awt.event.ItemEvent evt) {                                              
-       toPrice = new Destination().read(destinations.getSelectedItem().toString()).getPrice();
-    }                                             
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -84,9 +75,19 @@ public class PricesForm extends javax.swing.JFrame {
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 124, -1, -1));
 
         origins.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        origins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                originsActionPerformed(evt);
+            }
+        });
         jPanel1.add(origins, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 32, 320, -1));
 
         destinations.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        destinations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                destinationsActionPerformed(evt);
+            }
+        });
         jPanel1.add(destinations, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 78, 320, -1));
 
         price.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -111,6 +112,14 @@ public class PricesForm extends javax.swing.JFrame {
     private void consultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultActionPerformed
         sum();
     }//GEN-LAST:event_consultActionPerformed
+
+    private void originsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originsActionPerformed
+        fromPrice = new Origin().read(origins.getSelectedItem().toString()).getPrice();
+    }//GEN-LAST:event_originsActionPerformed
+
+    private void destinationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationsActionPerformed
+        toPrice = new Destination().read(destinations.getSelectedItem().toString()).getPrice();
+    }//GEN-LAST:event_destinationsActionPerformed
 
     /**
      * @param args the command line arguments
