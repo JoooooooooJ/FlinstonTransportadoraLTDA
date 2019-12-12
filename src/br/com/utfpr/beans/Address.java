@@ -8,6 +8,7 @@ public class Address {
     private String city;
     private String CEP;
     private String UF;
+    private String type;
 
     public long getId() {
         return id;
@@ -56,6 +57,22 @@ public class Address {
     public void setUF(String UF) {
         this.UF = UF;
     }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+
+    @Override
+    public String toString() {
+        return city + "/" + UF;
+    }
+    
+    
     
     
 }

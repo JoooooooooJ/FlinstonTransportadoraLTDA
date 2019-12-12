@@ -34,7 +34,6 @@ public class TrailerForm extends javax.swing.JFrame {
         chassi = new javax.swing.JTextField();
         capKG = new javax.swing.JTextField();
         type = new javax.swing.JComboBox<>();
-        AddImage = new javax.swing.JButton();
         menuPanel = new javax.swing.JPanel();
         Home = new javax.swing.JLabel();
         add = new javax.swing.JButton();
@@ -97,9 +96,6 @@ public class TrailerForm extends javax.swing.JFrame {
 
         type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Simples", "Dupla", "Tripla" }));
         TrailerData.add(type, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 125, 140, -1));
-
-        AddImage.setText("Adicionar Imagem");
-        TrailerData.add(AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 130, 40));
 
         getContentPane().add(TrailerData, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 550, 198));
 
@@ -214,7 +210,7 @@ public class TrailerForm extends javax.swing.JFrame {
        if(!isEmpty()){          
                    
             try {
-                new TrailerDao().add(newTrailer()); 
+                new TrailerDao().update(newTrailer()); 
                 JOptionPane.showMessageDialog(rootPane,"Carreta inserida com sucesso");
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(rootPane,"Erro ao Inserir no Banco!\n" + e);
@@ -320,7 +316,6 @@ public class TrailerForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddImage;
     private javax.swing.JLabel Home;
     private javax.swing.JLabel Image;
     private javax.swing.JPanel TrailerData;

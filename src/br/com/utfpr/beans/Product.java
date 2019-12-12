@@ -99,6 +99,39 @@ public class Product {
             throw new RuntimeException(e);
         }
     }
+    
+    public void add(Product prod){
+        try {
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "insert into produto values(?,?)";
+            PreparedStatement stmt = con.prepareStatement(sql);         
+            stmt.setString(1, prod.getName());
+            stmt.setDouble(2, prod.getPrice());
+            
+            stmt.execute();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public void remove(String name){
+        try {
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "delete from produto where nome =?";
+            PreparedStatement stmt = con.prepareStatement(sql);         
+            stmt.setString(1, name);
+            
+            stmt.execute();
+            stmt.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    
 
     @Override
     public String toString() {

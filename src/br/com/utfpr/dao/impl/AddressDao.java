@@ -24,6 +24,7 @@ public class AddressDao implements Dao<Address>{
                         "    cidade character varying(30) COLLATE pg_catalog.\"default\",\n" +
                         "    cep character varying(10) COLLATE pg_catalog.\"default\",\n" +
                         "    uf character varying(2) COLLATE pg_catalog.\"default\",\n" +
+                        "    tipo character varying(10) COLLATE pg_catalog.\"default\",\n" +
                         "    CONSTRAINT endereco_pkey PRIMARY KEY (cod)\n" +
                         ")\n" +
                         "WITH (\n" +
@@ -49,8 +50,8 @@ public class AddressDao implements Dao<Address>{
             Connection con;
             con = new ConnectionBuilder().getConnection();
             Address address = (Address) obj;
-            String sql = "insert into endereco(cod,rua,numero,cidade,cep,uf)"
-                      +  "values(?,?,?,?,?,?)";
+            String sql = "insert into endereco(cod,rua,numero,cidade,cep,uf,tipo)"
+                      +  "values(?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setLong(1, address.getId());
             stmt.setString(2,address.getStreet());
@@ -58,6 +59,7 @@ public class AddressDao implements Dao<Address>{
             stmt.setString(4,address.getCity());
             stmt.setString(5,address.getCEP());
             stmt.setString(6,address.getUF());
+            stmt.setString(7, address.getType());
             
             stmt.execute();
             stmt.close();
@@ -97,7 +99,7 @@ public class AddressDao implements Dao<Address>{
         
          try(Connection con = new ConnectionBuilder().getConnection()){            
             Address address = (Address) obj;
-            String sql = "update endereco set rua=? ,numero =? ,cidade =? ,cep =? ,uf=?"
+            String sql = "update endereco set rua=? ,numero =? ,cidade =? ,cep =? ,uf=?, tipo=?"
                       +  "where cod=?";
             PreparedStatement stmt = con.prepareStatement(sql);            
             stmt.setString(1,address.getStreet());
@@ -105,7 +107,8 @@ public class AddressDao implements Dao<Address>{
             stmt.setString(3,address.getCity());
             stmt.setString(4,address.getCEP());
             stmt.setString(5,address.getUF());
-            stmt.setLong(6, address.getId());
+            stmt.setString(6, address.getType());
+            stmt.setLong(7, address.getId());
             
             stmt.execute();
             stmt.close();
@@ -134,6 +137,7 @@ public class AddressDao implements Dao<Address>{
                 address.setCity(rs.getString("cidade"));
                 address.setCEP(rs.getString("cep"));
                 address.setUF(rs.getString("uf"));
+                address.setType(rs.getString("tipo"));
             }            
             stmt.close();           
             con.close();
@@ -163,6 +167,7 @@ public class AddressDao implements Dao<Address>{
                 address.setCity(rs.getString("cidade"));
                 address.setCEP(rs.getString("cep"));
                 address.setUF(rs.getString("uf"));
+                address.setType(rs.getString("tipo"));
                 addressList.add(address);
             }
             stmt.close();            
@@ -175,6 +180,34 @@ public class AddressDao implements Dao<Address>{
             throw new RuntimeException(e);
         }
  
+    }
+    
+    public Object readByCEP(String cep) {
+        try(Connection con = new ConnectionBuilder().getConnection()){            
+            Address address = new Address();
+            String sql = "select * from endereco where cep=?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1,cep);                        
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next())
+            {
+                address.setId(rs.getLong("cod"));
+                address.setStreet(rs.getString("rua"));
+                address.setNumber(rs.getInt("numero"));
+                address.setCity(rs.getString("cidade"));
+                address.setCEP(rs.getString("cep"));
+                address.setUF(rs.getString("uf"));
+                address.setType(rs.getString("tipo"));
+            }            
+            stmt.close();           
+            con.close();
+            
+            return address;
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        }
     }
     
 }

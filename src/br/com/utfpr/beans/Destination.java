@@ -15,9 +15,10 @@ public class Destination {
             Connection con = new ConnectionBuilder().getConnection();
             String sql = "CREATE TABLE IF NOT EXISTS public.destino\n" +
                         "(\n" +
+                        "    id bigint,\n"+
                         "    nome character varying(25) COLLATE pg_catalog.\"default\",\n" +
                         "    precodest numeric(6,2),\n" +
-                        "	CONSTRAINT destino_pkey PRIMARY KEY (nome)\n" +
+                        "	CONSTRAINT destino_pkey PRIMARY KEY (id)\n" +
                         ")\n" +
                         "WITH (\n" +
                         "    OIDS = FALSE\n" +
@@ -35,8 +36,24 @@ public class Destination {
         }  
     }
     
+    private Long id;
     private String name;
     private double price;
+
+    public Destination(Long id, String name, double price) {
+        this();
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -95,7 +112,28 @@ public class Destination {
             throw new RuntimeException(e);
         }
     }
-
+     public void add(Destination destination){
+        try{
+            Connection con;
+            con = new ConnectionBuilder().getConnection();
+            String sql = "insert into destino values(?,?,?)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, destination.getId());
+            stmt.setString(2,destination.getName());
+            stmt.setDouble(3,destination.getPrice());
+            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+       
+        }
+     }
+     
     @Override
     public String toString() {
         return name;

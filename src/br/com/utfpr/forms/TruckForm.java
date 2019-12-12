@@ -41,7 +41,6 @@ public class TruckForm extends javax.swing.JFrame {
         chassi = new javax.swing.JTextField();
         capTank = new javax.swing.JTextField();
         kml = new javax.swing.JTextField();
-        AddImage = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -161,9 +160,6 @@ public class TruckForm extends javax.swing.JFrame {
         TruckDataPanel.add(chassi, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 31, 81, -1));
         TruckDataPanel.add(capTank, new org.netbeans.lib.awtextra.AbsoluteConstraints(11, 79, 63, -1));
         TruckDataPanel.add(kml, new org.netbeans.lib.awtextra.AbsoluteConstraints(88, 79, 63, -1));
-
-        AddImage.setText("Adicionar Imagem");
-        TruckDataPanel.add(AddImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 110, 120, 40));
 
         getContentPane().add(TruckDataPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 520, 180));
 
@@ -314,7 +310,6 @@ public class TruckForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Add;
-    private javax.swing.JButton AddImage;
     private javax.swing.JButton Find;
     private javax.swing.JLabel Home;
     private javax.swing.JLabel Image;

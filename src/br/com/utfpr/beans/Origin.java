@@ -17,9 +17,10 @@ public class Origin {
             Connection con = new ConnectionBuilder().getConnection();
             String sql = "CREATE TABLE IF NOT EXISTS public.origem\n" +
                         "(\n" +
+                        "    id bigint,\n"+
                         "    nome character varying(25) COLLATE pg_catalog.\"default\",\n" +
                         "    precoorg numeric(6,2),\n" +
-                        "	CONSTRAINT origem_pkey PRIMARY KEY (nome)\n" +
+                        "	CONSTRAINT origem_pkey PRIMARY KEY (id)\n" +
                         ")\n" +
                         "WITH (\n" +
                         "    OIDS = FALSE\n" +
@@ -37,9 +38,25 @@ public class Origin {
         }        
     }
     
+    private Long id;
     private String name;
-    private double price;
+    private double price;  
+    
+    public Origin(Long id, String name, double price) {
+        this();
+        this.id = id;
+        this.name = name;
+        this.price = price;        
+    }   
+    
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }   
+    
     public String getName() {
         return name;
     }
@@ -96,6 +113,27 @@ public class Origin {
         }catch(SQLException e){
             throw new RuntimeException(e);
         }
+    }
+    
+    public void add(Origin origin){
+        try{
+            Connection con;
+            con = new ConnectionBuilder().getConnection();
+            String sql = "insert into origem values(?,?,?)";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setLong(1, origin.getId());
+            stmt.setString(2,origin.getName());
+            stmt.setDouble(3,origin.getPrice());
+            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){
+            
+            throw new RuntimeException(e);
+        } 
     }
 
     @Override

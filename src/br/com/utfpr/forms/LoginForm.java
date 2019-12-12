@@ -1,8 +1,8 @@
 package br.com.utfpr.forms;
 
-import FlinstonTrans.src.Classes.Login;
+
+import br.com.utfpr.beans.Login;
 import br.com.utfpr.dao.impl.LoginDao;
-import br.com.utfpr.util.InitializeCatalog;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -12,10 +12,10 @@ public class LoginForm extends javax.swing.JFrame {
     public LoginForm() {
         initComponents();
         sidePanel.setBackground(new Color(2,48,74,200));   
-        setLocationRelativeTo(null);
         List<Login> login =  new LoginDao().getList();
         if(login.isEmpty())
-            new InitializeCatalog().createAdmin();
+            new LoginDao().createAdmin();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -25,7 +25,6 @@ public class LoginForm extends javax.swing.JFrame {
         mainPanel = new javax.swing.JPanel();
         jLabel = new javax.swing.JLabel();
         LoginIcon = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         passPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
@@ -35,6 +34,7 @@ public class LoginForm extends javax.swing.JFrame {
         user = new javax.swing.JTextField();
         btnSignin = new javax.swing.JButton();
         PASSWORD = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         sidePanel = new javax.swing.JPanel();
         btnExit = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -55,10 +55,6 @@ public class LoginForm extends javax.swing.JFrame {
 
         LoginIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/utfpr/images/login_icon.png"))); // NOI18N
         mainPanel.add(LoginIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 30, 40));
-
-        jLabel2.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
-        jLabel2.setText("Faça seu login");
-        mainPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 200, 40));
 
         passPanel.setBackground(new java.awt.Color(255, 255, 255));
         passPanel.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(63, 197, 240), 1, true));
@@ -115,6 +111,10 @@ public class LoginForm extends javax.swing.JFrame {
         PASSWORD.setText("SENHA");
         mainPanel.add(PASSWORD, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        jLabel5.setText("Faça seu login");
+        mainPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 200, 40));
+
         getContentPane().add(mainPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, 300, 440));
 
         sidePanel.setBackground(new java.awt.Color(2, 48, 74));
@@ -138,12 +138,12 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSigninActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSigninActionPerformed
-        boolean validUser = false;
+        boolean validUser = false;        
         try{
-             validUser = new LoginDao().isValid(user.getText().trim(), password.getText().trim());
-             if(validUser){
-            new br.com.utfpr.forms.MainForm().show();
-            dispose();
+            validUser = new LoginDao().isValid(user.getText().trim(), password.getText().trim());
+            if(validUser){                
+                new br.com.utfpr.forms.MainForm().show();
+                dispose();
             }
             else{
                 JOptionPane.showMessageDialog(rootPane, "Usuario não existe");
@@ -203,8 +203,8 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JButton btnSignin;
     private javax.swing.JLabel jLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel loginIcon;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel passPanel;

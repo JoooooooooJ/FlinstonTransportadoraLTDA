@@ -11,7 +11,6 @@ import br.com.utfpr.dao.impl.DriverDao;
 import br.com.utfpr.dao.impl.FreightDao;
 import br.com.utfpr.dao.impl.TrailerDao;
 import br.com.utfpr.dao.impl.TruckDao;
-import br.com.utfpr.util.InitializeCatalog;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -97,23 +96,23 @@ public class FreightForm extends javax.swing.JFrame {
         trucks.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
 
         origins.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        origins.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                originsItemStateChanged(evt);
+        origins.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                originsActionPerformed(evt);
             }
         });
 
         destinations.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        destinations.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                destinationsItemStateChanged(evt);
+        destinations.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                destinationsActionPerformed(evt);
             }
         });
 
         products.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        products.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                productsItemStateChanged(evt);
+        products.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productsActionPerformed(evt);
             }
         });
 
@@ -268,41 +267,51 @@ public class FreightForm extends javax.swing.JFrame {
     Double total = 0.00, fromPrice = 0.0, toPrice = 0.0, cargoPrice = 0.0;
     
     private void cancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelActionPerformed
-        dispose();
-        new MainForm().show();        
+        new MainForm().show();         
+        dispose();               
     }//GEN-LAST:event_cancelActionPerformed
 
-    
     private void sum(){
             total = fromPrice + toPrice + cargoPrice;
             price.setText(Double.toString(total));       
     }
     
     private void confirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmActionPerformed
-        try{
-            new FreightDao().add(newFreight());
-            JOptionPane.showMessageDialog(rootPane,"Frete Confirmado!");
-            total = 0.00;
-        }catch(RuntimeException e){
-            JOptionPane.showMessageDialog(rootPane,"Erro ao salvar dados no Banco!\n" + e);
+        Freight freight = null;       
+        try {
+            freight = newFreight();           
+        
+            if(!new FreightDao().getList().contains(freight)){
+                try{
+                new FreightDao().add(freight);
+                JOptionPane.showMessageDialog(rootPane,"Frete Confirmado!");
+                total = 0.00;
+                }catch(RuntimeException e){
+                    JOptionPane.showMessageDialog(rootPane,"Erro ao salvar dados no Banco!\n");
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"Frete invalido: não foi possivel cadastrar o frete pois ele possui informações identicas a um frete em andamento!\n");
+        }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane,e.getMessage());
         }
     }//GEN-LAST:event_confirmActionPerformed
 
-    private void originsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_originsItemStateChanged
-        fromPrice = new Origin().read(origins.getSelectedItem().toString()).getPrice();
-        sum();
-    }//GEN-LAST:event_originsItemStateChanged
-
-    private void destinationsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_destinationsItemStateChanged
-       toPrice = new Destination().read(destinations.getSelectedItem().toString()).getPrice();
-       sum();
-    }//GEN-LAST:event_destinationsItemStateChanged
-
-    private void productsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_productsItemStateChanged
+    private void productsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productsActionPerformed
         Trailer trailer = (Trailer) new TrailerDao().read(trailers.getSelectedIndex()+1);
         cargoPrice = new Product().read(products.getSelectedItem().toString()).getPrice() * (trailer.getCapKG()/1000);        
         sum();
-    }//GEN-LAST:event_productsItemStateChanged
+    }//GEN-LAST:event_productsActionPerformed
+
+    private void destinationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_destinationsActionPerformed
+        toPrice = new Destination().read(destinations.getSelectedItem().toString()).getPrice();
+        sum();
+    }//GEN-LAST:event_destinationsActionPerformed
+
+    private void originsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_originsActionPerformed
+        fromPrice = new Origin().read(origins.getSelectedItem().toString()).getPrice();
+        sum();
+    }//GEN-LAST:event_originsActionPerformed
   
     private Freight newFreight(){        
         Freight freight = new Freight();
@@ -311,22 +320,26 @@ public class FreightForm extends javax.swing.JFrame {
                 .read(Long.parseLong(trucks.getSelectedItem().toString().substring(0,trucks.getSelectedItem().toString().indexOf("-")))));
         freight.setTrailer((Trailer) new TrailerDao()
                 .read(Long.parseLong(trailers.getSelectedItem().toString().substring(0,trailers.getSelectedItem().toString().indexOf("-")))));
-        freight.setOrigin(new Origin().read(origins.getSelectedItem().toString()));
-        freight.setDestination(new Destination().read(destinations.getSelectedItem().toString()));
-        freight.setCargo(new Product().read(products.getSelectedItem().toString()));
+            try{
+                freight.setOrigin(new Origin().read(origins.getSelectedItem().toString()));
+                freight.setDestination(new Destination().read(destinations.getSelectedItem().toString()));
+                freight.setCargo(new Product().read(products.getSelectedItem().toString()));
+            }catch(Exception e){
+                throw new RuntimeException("Nenhuma caixa deve estar vazia!!\n verifique se há algum produto, destino ou origem cadastrado e tente novamente");
+            }
         freight.setDriver((Driver) new DriverDao()
                 .read(Long.parseLong(drivers.getSelectedItem().toString().substring(0,drivers.getSelectedItem().toString().indexOf("-")))));
         Calendar exitDate = null ;
         Date date;
-        try {
+            try {
 
-            date = new SimpleDateFormat("dd/MM/yyyy").parse(this.exitDate.getText().trim());
-            exitDate = Calendar.getInstance();
-            exitDate.setTime(date);         
+                date = new SimpleDateFormat("dd/MM/yyyy").parse(this.exitDate.getText().trim());
+                exitDate = Calendar.getInstance();
+                exitDate.setTime(date);         
 
-        }catch(ParseException e){
-            JOptionPane.showMessageDialog(rootPane,"Erro ao converter data!\n" + e);
-        } 
+            }catch(ParseException e){
+                throw new RuntimeException("Erro ao converter data!\n");
+            } 
         freight.setExitDate(exitDate);
         freight.setPrice(Double.parseDouble(price.getText()));
         
@@ -346,18 +359,12 @@ public class FreightForm extends javax.swing.JFrame {
         new TrailerDao().getList().forEach((trailer) -> {
             trailers.addItem(trailer.toString());
         });
-        if(new Destination().getList().isEmpty())
-            new InitializeCatalog().InitializeCatalog();
         new Destination().getList().forEach((destination) -> {
             destinations.addItem(destination.toString());
         });
-        if(new Origin().getList().isEmpty())
-            new InitializeCatalog().InitializeCatalog();
         new Origin().getList().forEach((origin) -> {
             origins.addItem(origin.toString());
-        });        
-        if(new Product().getList().isEmpty())
-            new InitializeCatalog().InitializeCatalog();
+        });       
         new Product().getList().forEach((product) -> {
             products.addItem(product.toString());
         });

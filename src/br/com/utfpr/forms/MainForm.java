@@ -54,6 +54,8 @@ public class MainForm extends javax.swing.JFrame {
         btnTruckload = new javax.swing.JMenuItem();
         btnDriver = new javax.swing.JMenuItem();
         consultarPrecos = new javax.swing.JMenuItem();
+        local = new javax.swing.JMenuItem();
+        product = new javax.swing.JMenuItem();
         btnMainSystem = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -123,6 +125,22 @@ public class MainForm extends javax.swing.JFrame {
         });
         btnRegistry.add(consultarPrecos);
 
+        local.setText("Localidade");
+        local.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                localActionPerformed(evt);
+            }
+        });
+        btnRegistry.add(local);
+
+        product.setText("Produto");
+        product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                productActionPerformed(evt);
+            }
+        });
+        btnRegistry.add(product);
+
         jMenuBar1.add(btnRegistry);
 
         btnMainSystem.setText("Transportadora");
@@ -165,6 +183,16 @@ public class MainForm extends javax.swing.JFrame {
        new br.com.utfpr.forms.PricesForm().show();
         dispose();
     }//GEN-LAST:event_consultarPrecosActionPerformed
+
+    private void localActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_localActionPerformed
+        new br.com.utfpr.forms.LocalForm().show();
+        dispose();
+    }//GEN-LAST:event_localActionPerformed
+
+    private void productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productActionPerformed
+        new br.com.utfpr.forms.ProductForm().show();
+        dispose();
+    }//GEN-LAST:event_productActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -209,7 +237,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem consultarPrecos;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem local;
     private javax.swing.JPanel mainBackgroundPanel;
+    private javax.swing.JMenuItem product;
     private javax.swing.JPanel sidePanel;
     private javax.swing.JScrollPane tblServices;
     // End of variables declaration//GEN-END:variables

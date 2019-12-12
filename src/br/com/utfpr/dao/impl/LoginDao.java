@@ -1,6 +1,6 @@
 package br.com.utfpr.dao.impl;
 
-import FlinstonTrans.src.Classes.Login;
+import br.com.utfpr.beans.Login;
 import br.com.utfpr.dao.ConnectionBuilder;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -72,6 +72,21 @@ public class LoginDao {
             }
             return listLogin;
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+     
+     public void createAdmin(){
+         try{         
+            Connection con = new ConnectionBuilder().getConnection();
+            String sql = "insert into login values(1,'admin','admin')";
+            PreparedStatement stmt = con.prepareStatement(sql);            
+            stmt.execute();
+            stmt.close();
+            
+            con.close();
+            
+        }catch(SQLException e){            
             throw new RuntimeException(e);
         }
     }

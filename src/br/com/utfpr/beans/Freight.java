@@ -1,6 +1,7 @@
 package br.com.utfpr.beans;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Freight {
     
@@ -96,6 +97,54 @@ public class Freight {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Freight other = (Freight) obj;
+        if (!Objects.equals(this.service, other.service)) {
+            return false;
+        }
+        if (!Objects.equals(this.truck, other.truck)) {
+            return false;
+        }
+        if (!Objects.equals(this.trailer, other.trailer)) {
+            return false;
+        }
+        if (!Objects.equals(this.origin, other.origin)) {
+            return false;
+        }
+        if (!Objects.equals(this.destination, other.destination)) {
+            return false;
+        }
+        if (!Objects.equals(this.Cargo, other.Cargo)) {
+            return false;
+        }
+        if (!Objects.equals(this.driver, other.driver)) {
+            return false;
+        }
+        if (!Objects.equals(this.exitDate, other.exitDate)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
     
     
